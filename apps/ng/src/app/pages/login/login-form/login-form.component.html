@@ -1,0 +1,34 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit(form)" #NgForm="ngForm">
+  <div class="mb-5">
+    <app-form-group
+      formControlName="username"
+      [errorsMap]="usernameErrorsMap"
+      [isSubmitted]="NgForm.submitted"
+      placeholder="e.g. Sparky"
+      label="Username">
+    </app-form-group>
+
+    <app-form-group
+      formControlName="password"
+      [errorsMap]="passwordErrorsMap"
+      [isSubmitted]="NgForm.submitted"
+      type="password"
+      placeholder="******"
+      label="Password">
+    </app-form-group>
+  </div>
+
+  <div class="mb-1">
+    <button
+      appBtn
+      color="orange"
+      [fullWidth]="true"
+      type="submit">
+        Sign In
+    </button>
+  </div>
+
+  <div class="text-center">
+    <a class="underline text-sm" routerLink="/auth/register">Don't have an account yet?</a>
+  </div>
+</form>

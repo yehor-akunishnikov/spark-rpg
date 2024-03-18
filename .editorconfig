@@ -11,3 +11,9 @@ trim_trailing_whitespace = true
 [*.md]
 max_line_length = off
 trim_trailing_whitespace = false
+
+[{*.ats,*.cts,*.mts,*.ts}]
+ij_typescript_spaces_within_imports = true
+
+[{*.cjs,*.js,*.jsx}]
+ij_javascript_spaces_within_imports = true

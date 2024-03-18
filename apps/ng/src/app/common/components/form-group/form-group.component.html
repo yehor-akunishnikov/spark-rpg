@@ -1,0 +1,21 @@
+<div class="mb-1">
+  <label class="mb-0.5 block" [class.required]="errorsMap['required']" [for]="formControlName">{{label}}</label>
+
+  <div>
+    <input
+      class="border rounded w-full px-2 py-1.5"
+      [id]="formControlName"
+      [type]="type"
+      [placeholder]="placeholder"
+      [formControl]="control"
+      [ngClass]="class"
+      [class.border-red-700]="isSubmitted && control.invalid">
+    <div>
+      <app-form-field-error
+        [isSubmitted]="isSubmitted"
+        [errors]="control.errors"
+        [errorsMap]="errorsMap">
+      </app-form-field-error>
+    </div>
+  </div>
+</div>
