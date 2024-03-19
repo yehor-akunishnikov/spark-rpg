@@ -61,7 +61,9 @@
       },
       "defaultConfiguration": "development",
       "options": {
-        "proxyConfig": "apps/ng/proxy.conf.json"
+        "proxyConfig": "apps/ng/proxy.conf.json",
+        "host": "0.0.0.0",
+        "disableHostCheck": true
       }
     },
     "extract-i18n": {
