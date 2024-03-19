@@ -2,7 +2,9 @@ import { FormControl, ValidationErrors, ValidatorFn, Validators } from '@angular
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { inject, Injectable } from '@angular/core';
 
-export interface RegisterForm {
+import { LoginPayload } from '@spark-rpg/shared-models';
+
+export interface RegisterForm extends Omit<LoginPayload, 'username' | 'password'> {
   username: FormControl<string>;
   password: FormControl<string>;
   repeatPassword: FormControl<string>;

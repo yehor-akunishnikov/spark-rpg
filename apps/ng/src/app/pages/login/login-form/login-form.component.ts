@@ -1,11 +1,12 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-import { LoginPayload } from '@spark-rpg/shared-models';
-
-import { LoginForm, LoginFormBuilderService } from './services/login-form-builder.service';
-import { FormGroupComponent } from '../../../common/components/form-group/form-group.component';
+import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+
+import { LoginPayload, LoginResponse } from '@spark-rpg/shared-models';
+
+import { FormGroupComponent } from '../../../common/components/form-group/form-group.component';
+import { AuthRestService } from '../../../data-layers/auth/rest/services/auth-rest.service';
+import { LoginForm, LoginFormBuilderService } from './services/login-form-builder.service';
 import { BtnDirective } from '../../../common/directives/btn.directive';
 
 @Component({
@@ -13,7 +14,6 @@ import { BtnDirective } from '../../../common/directives/btn.directive';
   standalone: true,
   imports: [
     FormGroupComponent,
-    FormsModule,
     ReactiveFormsModule,
     RouterLink,
     BtnDirective
@@ -24,6 +24,7 @@ import { BtnDirective } from '../../../common/directives/btn.directive';
 })
 export class LoginFormComponent {
   private loginFromBuilderService: LoginFormBuilderService = inject(LoginFormBuilderService);
+  private authRestService: AuthRestService = inject(AuthRestService);
 
   public form: FormGroup<LoginForm> = this.loginFromBuilderService.init();
   public usernameErrorsMap: Record<string, string> = this.loginFromBuilderService.usernameErrorsMap;
@@ -31,8 +32,17 @@ export class LoginFormComponent {
 
   public onSubmit(form: FormGroup<LoginForm>): void {
     if (form.valid) {
-      const formValue: LoginPayload = form.getRawValue();
-      console.log(formValue);
+      const formValue = form.getRawValue();
+      const loginPayload: LoginPayload = {username: formValue.username, password: formValue.password};
+
+      this.authRestService.login(loginPayload).subscribe({
+        next: (loginResponse: LoginResponse) => {
+          console.log('success', loginResponse);
+        },
+        error: () => {
+          console.log('error');
+        }
+      });
     } else {
       form.markAllAsTouched();
     }

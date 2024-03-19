@@ -1,13 +1,8 @@
-export interface LoginPayload {
-  username: string;
-  password: string;
-}
+import { User } from './user.models';
 
-export interface RegisterPayload {
-  username: string;
-  password: string;
-}
+export type LoginPayload = Pick<User, 'username' | 'password'>;
+export type RegisterPayload = Pick<User, 'username' | 'password'>;
 
-export interface AuthResponse {
+export interface LoginResponse {
   token: string;
 }

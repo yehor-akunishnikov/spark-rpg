@@ -6,6 +6,7 @@ export interface User {
 }
 
 export type UserProfile = Pick<User, 'username'>;
+export type UserMe = Pick<User, 'username' | 'role'>;
 
 export enum USER_ROLES {
   PLAYER = 'Player',

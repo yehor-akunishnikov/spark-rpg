@@ -12,6 +12,7 @@ services:
       NODE_ENV: development
       NX_SKIP_NX_CACHE: "true"
       DB_URL: postgres://user:password@postgres:5432/db
+      JWT_SECRET: 2C482C4BE1D9236EBD5FFA485FC67
     expose:
       - "4200"
       - "3000"

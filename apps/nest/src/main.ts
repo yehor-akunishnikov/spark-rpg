@@ -1,4 +1,4 @@
-import { ClassSerializerInterceptor, Logger, ValidationPipe } from '@nestjs/common';
+  import { ClassSerializerInterceptor, Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory, Reflector } from '@nestjs/core';
 
 import { TypeOrmFilter } from './app/common/exception-filters/type-orm.filter';

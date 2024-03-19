@@ -1,14 +1,12 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { KeyValuePipe, NgForOf } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 import { RegisterPayload } from '@spark-rpg/shared-models';
 
-import { FormFieldErrorComponent } from '../../../../common/components/form-field-error/form-field-error.component';
 import { RegisterForm, RegisterFromBuilderService } from './services/register-from-builder.service';
 import { FormGroupComponent } from '../../../../common/components/form-group/form-group.component';
-import { ErrorTitlePipe } from '../../../../common/pipes/error-title.pipe';
-import { RouterLink } from '@angular/router';
+import { AuthRestService } from '../../../../data-layers/auth/rest/services/auth-rest.service';
 import { BtnDirective } from '../../../../common/directives/btn.directive';
 
 @Component({
@@ -16,10 +14,6 @@ import { BtnDirective } from '../../../../common/directives/btn.directive';
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    ErrorTitlePipe,
-    FormFieldErrorComponent,
-    NgForOf,
-    KeyValuePipe,
     FormGroupComponent,
     RouterLink,
     BtnDirective,
@@ -31,6 +25,7 @@ import { BtnDirective } from '../../../../common/directives/btn.directive';
 })
 export class RegisterFormComponent {
   private registerFromBuilderService: RegisterFromBuilderService = inject(RegisterFromBuilderService);
+  private authRestService: AuthRestService = inject(AuthRestService);
 
   public form: FormGroup<RegisterForm> = this.registerFromBuilderService.init();
   public usernameErrorsMap: Record<string, string> = this.registerFromBuilderService.usernameErrorsMap;
@@ -39,8 +34,17 @@ export class RegisterFormComponent {
 
   public onSubmit(form: FormGroup<RegisterForm>): void {
     if (form.valid) {
-      const formValue: RegisterPayload = form.getRawValue();
-      console.log(formValue);
+      const formValue = form.getRawValue();
+      const registerPayload: RegisterPayload = {username: formValue.username, password: formValue.password};
+
+      this.authRestService.register(registerPayload).subscribe({
+        next: () => {
+          console.log('success');
+        },
+        error: () => {
+          console.log('error');
+        }
+      });
     } else {
       form.markAllAsTouched();
     }
