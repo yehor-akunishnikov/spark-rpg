@@ -11,10 +11,13 @@ services:
     environment:
       NODE_ENV: development
       NX_SKIP_NX_CACHE: "true"
+      DB_URL: postgres://user:password@postgres:5432/db
     expose:
       - "4200"
+      - "3000"
     ports:
-      - "8080:4200"
+      - "4200:4200"
+      - "3000:3000"
     command: npm run start
   postgres:
     image: postgres:16.2

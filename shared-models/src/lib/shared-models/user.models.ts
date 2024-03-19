@@ -1,11 +1,11 @@
-import {Character} from './character.models';
-
 export interface User {
+  id?: string;
   username: string;
   password?: string;
-  role: USER_ROLES;
-  characters: Character[];
+  role?: USER_ROLES;
 }
+
+export type UserProfile = Pick<User, 'username'>;
 
 export enum USER_ROLES {
   PLAYER = 'Player',
