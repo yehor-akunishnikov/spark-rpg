@@ -18,5 +18,5 @@ import { ErrorTitlePipe } from '../../pipes/error-title.pipe';
 export class FormFieldErrorComponent {
   @Input() errors: ValidationErrors = {};
   @Input() errorsMap: Record<string, string> = {};
-  @Input() isSubmitted: boolean = false;
+  @Input() isSubmitted = false;
 }

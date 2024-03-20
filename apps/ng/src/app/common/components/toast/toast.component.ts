@@ -28,7 +28,7 @@ import { TOAST_STATUSES, ToastService } from './services/toast.service';
   ]
 })
 export class ToastComponent implements OnInit {
-  private platformId: Object = inject(PLATFORM_ID);
+  private platformId = inject(PLATFORM_ID);
   public toastService: ToastService = inject(ToastService);
 
   public TOAST_STATUSES = TOAST_STATUSES;

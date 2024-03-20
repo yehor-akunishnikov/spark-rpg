@@ -6,7 +6,7 @@ import { Directive, HostBinding, Input } from '@angular/core';
 })
 export class BtnDirective {
   @Input() baseClasses = 'text-white py-1 px-3 rounded cursor-pointer disabled:cursor-default';
-  @Input() color: string = 'orange';
+  @Input() color = 'orange';
   @Input() size: 'sm' | 'md' | 'lg' = 'md';
   @Input() fullWidth = false;
 

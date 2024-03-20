@@ -20,9 +20,9 @@ import { FormFieldErrorComponent } from '../form-field-error/form-field-error.co
 })
 export class FormGroupComponent implements AfterContentInit, ControlValueAccessor {
   @Input() formControlName: string;
-  @Input() placeholder: string = 'e.g. Ricardo';
+  @Input() placeholder = 'e.g. Ricardo';
   @Input() errorsMap: Record<string, string> = {};
-  @Input() label: string = 'Label';
+  @Input() label = 'Label';
   @Input() type: 'text' | 'password' | 'number' = 'text';
   @Input() class: string;
   @Input() isSubmitted = true;
