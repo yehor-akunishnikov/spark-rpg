@@ -28,8 +28,12 @@ export class ToastService {
 
   public toastState$: Observable<ToastState> = this.toastSubject$.asObservable();
 
-  public showToast(status: TOAST_STATUSES, message: string, dismissTime = 5000): void {
-    this.toastSubject$.next({...this.toastSubject$.value, show: true, message, status});
+  public showToast(status: TOAST_STATUSES, message: string, dismissTime = 5500): void {
+    this.dismissToast();
+
+    setTimeout(() => {
+      this.toastSubject$.next({...this.toastSubject$.value, show: true, message, status});
+    }, 500);
 
     if (dismissTime) {
       setTimeout(() => {
