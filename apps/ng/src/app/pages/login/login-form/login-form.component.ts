@@ -40,8 +40,9 @@ export class LoginFormComponent {
 
       this.authRestService.login(loginPayload).subscribe({
         next: () => {
-          this.toastService.showToast(TOAST_STATUSES.SUCCESS, 'Successfully signed in!');
-          this.router.navigateByUrl('/');
+          this.router.navigateByUrl('/').then(
+            () => this.toastService.showToast(TOAST_STATUSES.SUCCESS, 'Successfully signed in!')
+          );
         },
         error: () => {
           this.toastService.showToast(TOAST_STATUSES.ERROR, 'Failed to Sign In. Please, try again');

@@ -42,8 +42,9 @@ export class RegisterFormComponent {
 
       this.authRestService.register(registerPayload).subscribe({
         next: () => {
-          this.toastService.showToast(TOAST_STATUSES.SUCCESS, 'Successfully registered, redirecting to login page');
-          this.router.navigateByUrl('/auth/login');
+          this.router.navigateByUrl('/auth/login').then(() => {
+            this.toastService.showToast(TOAST_STATUSES.SUCCESS, 'Successfully registered, redirecting to login page');
+          });
         },
         error: () => {
           this.toastService.showToast(TOAST_STATUSES.ERROR, 'Failed to Sign Up. Please, try again');
