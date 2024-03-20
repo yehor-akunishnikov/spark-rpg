@@ -1,8 +1,10 @@
-import { FormControl, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { inject, Injectable } from '@angular/core';
 
 import { LoginPayload } from '@spark-rpg/shared-models';
+
+import { passwordsNotEqualValidator } from '../validators/passwords-not-equal.validator';
 
 export interface RegisterForm extends Omit<LoginPayload, 'username' | 'password'> {
   username: FormControl<string>;
@@ -12,21 +14,20 @@ export interface RegisterForm extends Omit<LoginPayload, 'username' | 'password'
 
 @Injectable()
 export class RegisterFromBuilderService {
+  private fb: FormBuilder = inject(FormBuilder);
+
   public usernameErrorsMap: Record<string, string> = {
     required: 'Username is required',
-    maxlength: 'Invalid username'
+    maxlength: 'Invalid username',
+    usernameDuplicated: 'Such user already exists'
   };
-
   public passwordErrorsMap: Record<string, string> = {
     required: 'Password is required',
     pattern: 'Invalid password'
   };
-
   public repeatPasswordErrorsMap: Record<string, string> = {
     passwordsEquality: 'Passwords must be equal',
   }
-
-  private fb: FormBuilder = inject(FormBuilder);
 
   public init(): FormGroup<RegisterForm> {
     return this.fb.group({
@@ -36,7 +37,7 @@ export class RegisterFromBuilderService {
           validators: [
             Validators.required,
             Validators.maxLength(10),
-          ]
+          ],
         },
       ),
       password: this.fb.control(
@@ -45,25 +46,12 @@ export class RegisterFromBuilderService {
           validators: [
             Validators.required,
             Validators.pattern(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,16}$/)
-          ]
+          ],
         }
       ),
       repeatPassword: this.fb.control(''),
-    }, { validators: [this.getPasswordsEqualityValidator()] });
-  }
-
-  private getPasswordsEqualityValidator(): ValidatorFn {
-    return (formGroup: AbstractControl): ValidationErrors | null => {
-      const password = formGroup.get('password');
-      const repeatPassword = formGroup.get('repeatPassword');
-
-      if (password.value !== repeatPassword.value) {
-        repeatPassword.setErrors({ passwordsEquality: true });
-      } else {
-        repeatPassword.setErrors(null);
-      }
-
-      return null;
-    };
+    }, {
+      validators: [passwordsNotEqualValidator()],
+    });
   }
 }

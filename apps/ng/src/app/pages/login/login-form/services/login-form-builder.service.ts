@@ -12,17 +12,16 @@ export interface LoginForm extends Omit<LoginPayload, 'username' | 'password'> {
   providedIn: 'root'
 })
 export class LoginFormBuilderService {
+  private fb: FormBuilder = inject(FormBuilder);
+
   public usernameErrorsMap: Record<string, string> = {
     required: 'Username is required',
     maxlength: 'Invalid username'
   };
-
   public passwordErrorsMap: Record<string, string> = {
     required: 'Password is required',
     pattern: 'Invalid password'
   };
-
-  private fb: FormBuilder = inject(FormBuilder);
 
   public init(): FormGroup<LoginForm> {
     return this.fb.group({
