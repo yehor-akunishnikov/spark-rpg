@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
-import { LoginPayload, LoginResponse } from '@spark-rpg/shared-models';
+import { LoginPayload } from '@spark-rpg/shared-models';
 
+import { TOAST_STATUSES, ToastService } from '../../../common/components/toast/services/toast.service';
 import { FormGroupComponent } from '../../../common/components/form-group/form-group.component';
 import { AuthRestService } from '../../../data-layers/auth/rest/services/auth-rest.service';
 import { LoginForm, LoginFormBuilderService } from './services/login-form-builder.service';
@@ -25,6 +26,8 @@ import { BtnDirective } from '../../../common/directives/btn.directive';
 export class LoginFormComponent {
   private loginFromBuilderService: LoginFormBuilderService = inject(LoginFormBuilderService);
   private authRestService: AuthRestService = inject(AuthRestService);
+  private toastService: ToastService = inject(ToastService);
+  private router: Router = inject(Router);
 
   public form: FormGroup<LoginForm> = this.loginFromBuilderService.init();
   public usernameErrorsMap: Record<string, string> = this.loginFromBuilderService.usernameErrorsMap;
@@ -36,11 +39,12 @@ export class LoginFormComponent {
       const loginPayload: LoginPayload = {username: formValue.username, password: formValue.password};
 
       this.authRestService.login(loginPayload).subscribe({
-        next: (loginResponse: LoginResponse) => {
-          console.log('success', loginResponse);
+        next: () => {
+          this.toastService.showToast(TOAST_STATUSES.SUCCESS, 'Successfully signed in!');
+          this.router.navigateByUrl('/');
         },
         error: () => {
-          console.log('error');
+          this.toastService.showToast(TOAST_STATUSES.ERROR, 'Failed to Sign In. Please, try again');
         }
       });
     } else {

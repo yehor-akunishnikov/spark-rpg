@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 import { RegisterPayload } from '@spark-rpg/shared-models';
 
+import { TOAST_STATUSES, ToastService } from '../../../../common/components/toast/services/toast.service';
 import { RegisterForm, RegisterFromBuilderService } from './services/register-from-builder.service';
 import { FormGroupComponent } from '../../../../common/components/form-group/form-group.component';
 import { AuthRestService } from '../../../../data-layers/auth/rest/services/auth-rest.service';
@@ -26,6 +27,8 @@ import { BtnDirective } from '../../../../common/directives/btn.directive';
 export class RegisterFormComponent {
   private registerFromBuilderService: RegisterFromBuilderService = inject(RegisterFromBuilderService);
   private authRestService: AuthRestService = inject(AuthRestService);
+  private toastService: ToastService = inject(ToastService);
+  private router: Router = inject(Router);
 
   public form: FormGroup<RegisterForm> = this.registerFromBuilderService.init();
   public usernameErrorsMap: Record<string, string> = this.registerFromBuilderService.usernameErrorsMap;
@@ -39,10 +42,11 @@ export class RegisterFormComponent {
 
       this.authRestService.register(registerPayload).subscribe({
         next: () => {
-          console.log('success');
+          this.toastService.showToast(TOAST_STATUSES.SUCCESS, 'Successfully registered, redirecting to login page');
+          this.router.navigateByUrl('/auth/login');
         },
         error: () => {
-          console.log('error');
+          this.toastService.showToast(TOAST_STATUSES.ERROR, 'Failed to Sign Up. Please, try again');
         }
       });
     } else {
