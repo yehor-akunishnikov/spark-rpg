@@ -1,8 +1,9 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { LoginPayload, LoginResponse, RegisterPayload } from '@spark-rpg/shared-models';
 import { Observable } from 'rxjs';
+
+import { LoginPayload, RegisterPayload } from '@spark-rpg/shared-models';
 
 @Injectable({
   providedIn: 'root'
@@ -10,11 +11,15 @@ import { Observable } from 'rxjs';
 export class AuthRestService {
   private http: HttpClient = inject(HttpClient);
 
-  public login(loginPayload: LoginPayload): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>('/api/login', loginPayload);
+  public login(loginPayload: LoginPayload): Observable<void> {
+    return this.http.post<void>('/api/login', loginPayload);
   }
 
   public register(registerPayload: RegisterPayload): Observable<void> {
     return this.http.post<void>('/api/register', registerPayload);
+  }
+
+  public logout(): Observable<void> {
+    return this.http.get<void>('/api/logout');
   }
 }

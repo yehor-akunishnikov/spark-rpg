@@ -18,12 +18,7 @@
         "inlineStyleLanguage": "scss",
         "assets": ["apps/ng/src/favicon.ico", "apps/ng/src/assets"],
         "styles": ["apps/ng/src/styles.scss"],
-        "scripts": [],
-        "server": "apps/ng/src/main.server.ts",
-        "prerender": true,
-        "ssr": {
-          "entry": "apps/ng/server.ts"
-        }
+        "scripts": []
       },
       "configurations": {
         "production": {

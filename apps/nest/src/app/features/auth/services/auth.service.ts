@@ -3,7 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 
 import * as bcrypt from 'bcrypt';
 
-import { LoginResponse, User } from '@spark-rpg/shared-models';
+import { TokenWrapper, User } from '@spark-rpg/shared-models';
 
 import { UserService } from '../../user/services/user.service';
 
@@ -28,7 +28,7 @@ export class AuthService {
     return null;
   }
 
-  public async login({username, id}: User): Promise<LoginResponse> {
+  public async login({username, id}: User): Promise<TokenWrapper> {
     const payload = {username, sub: id};
 
     return {token: this.jwtService.sign(payload)};

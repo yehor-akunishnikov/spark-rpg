@@ -1,5 +1,7 @@
-  import { ClassSerializerInterceptor, Logger, ValidationPipe } from '@nestjs/common';
+import { ClassSerializerInterceptor, Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory, Reflector } from '@nestjs/core';
+
+import cookieParser from 'cookie-parser';
 
 import { TypeOrmFilter } from './app/common/exception-filters/type-orm.filter';
 import { AppModule } from './app/app.module';
@@ -21,6 +23,7 @@ async function bootstrap() {
       strategy: 'excludeAll',
     }),
   );
+  app.use(cookieParser());
 
   await app.listen(port);
 

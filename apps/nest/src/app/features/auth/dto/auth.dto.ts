@@ -1,5 +1,4 @@
-import { IsNotEmpty, IsString } from 'class-validator';
-import { Expose } from 'class-transformer';
+import { IsNotEmpty, IsString, IsStrongPassword } from 'class-validator';
 
 export class LoginRequestDto {
   @IsNotEmpty()
@@ -11,7 +10,13 @@ export class LoginRequestDto {
   password: string;
 }
 
-export class LoginResponseDto {
-  @Expose()
-  token: string;
+export class RegisterRequestDto {
+  @IsNotEmpty()
+  @IsString()
+  username: string;
+
+  @IsNotEmpty()
+  @IsString()
+  @IsStrongPassword()
+  password: string;
 }

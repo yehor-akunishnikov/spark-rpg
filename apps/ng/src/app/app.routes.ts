@@ -1,11 +1,15 @@
 import { Route } from '@angular/router';
 
-import { API_DATA_RESOLVER_KEY, apiDataResolver } from './pages/api-data/resolvers/api-data.resolver';
+import { CURRENT_USER_DATA_KEY, currentUserResolver } from './data-layers/user/rest/resolvers/current-user.resolver';
+import { logoutGuard } from './common/guards/logout.guard';
 
 export const appRoutes: Route[] = [
   {
     path: '',
     loadComponent: () => import('./layouts/default-layout/default-layout.component').then(m => m.DefaultLayoutComponent),
+    resolve: {
+      [CURRENT_USER_DATA_KEY]: currentUserResolver,
+    },
     children: [
       {
         path: '',
@@ -18,14 +22,7 @@ export const appRoutes: Route[] = [
       },
       {
         path: 'characters',
-        loadComponent: () => import('./pages/characters/characters.component').then(m => m.CharactersComponent)
-      },
-      {
-        path: 'test-api-data',
-        loadComponent: () => import('./pages/api-data/api-data.component').then(m => m.ApiDataComponent),
-        resolve: {
-          [API_DATA_RESOLVER_KEY]: apiDataResolver,
-        }
+        loadComponent: () => import('./pages/characters/characters.component').then(m => m.CharactersComponent),
       },
     ],
   },
@@ -40,11 +37,17 @@ export const appRoutes: Route[] = [
       },
       {
         path: 'register',
+        canActivate: [logoutGuard()],
         loadComponent: () => import('./pages/register/register.component').then(m => m.RegisterComponent),
       },
       {
         path: 'login',
+        canActivate: [logoutGuard()],
         loadComponent: () => import('./pages/login/login.component').then(m => m.LoginComponent),
+      },
+      {
+        path: 'logout',
+        redirectTo: 'login'
       }
     ],
   },

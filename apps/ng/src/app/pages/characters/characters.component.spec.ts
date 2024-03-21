@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CharactersComponent } from './characters.component';
 
-describe('CharactersComponent', () => {
+describe('ApiDataComponent', () => {
   let component: CharactersComponent;
   let fixture: ComponentFixture<CharactersComponent>;
 
@@ -11,7 +11,7 @@ describe('CharactersComponent', () => {
       imports: [CharactersComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(CharactersComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
