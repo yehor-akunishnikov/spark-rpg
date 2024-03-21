@@ -1,6 +1,8 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 import { USER_ROLES } from '@spark-rpg/shared-models';
+
+import { CharacterEntity } from '../../character/models/character.entity';
 
 @Entity()
 export class UserEntity {
@@ -19,4 +21,9 @@ export class UserEntity {
     default: USER_ROLES.PLAYER
   })
   role?: USER_ROLES;
+
+  @OneToMany(() => CharacterEntity, (characterEntity) => characterEntity.creator, {
+    cascade: true,
+  })
+  characters: CharacterEntity[];
 }

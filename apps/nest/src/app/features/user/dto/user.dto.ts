@@ -1,6 +1,7 @@
 import { IsNotEmpty, IsString } from 'class-validator';
 
 import { Expose } from 'class-transformer';
+
 import { USER_ROLES } from '@spark-rpg/shared-models';
 
 export class CreateUserRequestDto {
@@ -23,5 +24,5 @@ export class UserMeResponseDto {
   username: string;
 
   @Expose()
-  role?: USER_ROLES;
+  role: USER_ROLES;
 }

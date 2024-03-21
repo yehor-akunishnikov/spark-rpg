@@ -1,12 +1,22 @@
 export interface Character {
-  creator: string;
+  creator?: string;
   name: string;
-  stats: Record<string, number>;
-  inventory: Item[];
+  stats: CharacterStats;
+  // inventory: Item[];
   class: CHARACTER_CLASSES;
   race: CHARACTER_RACES;
   biography: string;
   icon?: string;
+}
+
+export interface CharacterStats {
+  strength: number,
+  charisma: number,
+  endurance: number,
+  intelligence: number,
+  agility: number,
+  perception: number,
+  luck: number
 }
 
 export interface Item {

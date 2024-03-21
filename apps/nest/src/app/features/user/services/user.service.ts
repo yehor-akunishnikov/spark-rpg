@@ -31,8 +31,8 @@ export class UserService {
     return this.userRepository.find({where: findOptionsWhere});
   }
 
-  public findOne(username: string): Promise<UserEntity> {
-    return this.userRepository.findOneOrFail({where: {username}});
+  public findOne(username: string, relations: string[] = []): Promise<UserEntity> {
+    return this.userRepository.findOneOrFail({where: {username}, relations});
   }
 
   public delete(id: string): Promise<DeleteResult> {

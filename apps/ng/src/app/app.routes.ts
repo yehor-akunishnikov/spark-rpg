@@ -5,6 +5,7 @@ import { API_DATA_RESOLVER_KEY, apiDataResolver } from './pages/api-data/resolve
 export const appRoutes: Route[] = [
   {
     path: '',
+    loadComponent: () => import('./layouts/default-layout/default-layout.component').then(m => m.DefaultLayoutComponent),
     children: [
       {
         path: '',
@@ -13,13 +14,11 @@ export const appRoutes: Route[] = [
       },
       {
         path: 'home',
-        loadComponent: () => import('./layouts/default-layout/default-layout.component').then(m => m.DefaultLayoutComponent),
-        children: [
-          {
-            path: '',
-            loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent),
-          }
-        ],
+        loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent),
+      },
+      {
+        path: 'characters',
+        loadComponent: () => import('./pages/characters/characters.component').then(m => m.CharactersComponent)
       },
       {
         path: 'test-api-data',
@@ -28,26 +27,26 @@ export const appRoutes: Route[] = [
           [API_DATA_RESOLVER_KEY]: apiDataResolver,
         }
       },
+    ],
+  },
+  {
+    path: 'auth',
+    loadComponent: () => import('./layouts/auth-layout/auth-layout.component').then(m => m.AuthLayoutComponent),
+    children: [
       {
-        path: 'auth',
-        loadComponent: () => import('./layouts/auth-layout/auth-layout.component').then(m => m.AuthLayoutComponent),
-        children: [
-          {
-            path: '',
-            redirectTo: 'login',
-            pathMatch: 'full',
-          },
-          {
-            path: 'register',
-            loadComponent: () => import('./pages/register/register.component').then(m => m.RegisterComponent),
-          },
-          {
-            path: 'login',
-            loadComponent: () => import('./pages/login/login.component').then(m => m.LoginComponent),
-          }
-        ],
+        path: '',
+        redirectTo: 'login',
+        pathMatch: 'full',
+      },
+      {
+        path: 'register',
+        loadComponent: () => import('./pages/register/register.component').then(m => m.RegisterComponent),
+      },
+      {
+        path: 'login',
+        loadComponent: () => import('./pages/login/login.component').then(m => m.LoginComponent),
       }
-    ]
+    ],
   },
   {
     path: '**',
