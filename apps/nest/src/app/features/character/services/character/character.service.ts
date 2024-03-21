@@ -25,14 +25,9 @@ export class CharacterService {
   }
 
   public async create(userId: string, createCharacterDto: CreateCharacterDto): Promise<Character> {
-    const character = this.characterRepository.create(createCharacterDto);
+    const character = this.characterRepository.create({...createCharacterDto, creator: userId});
 
     await this.characterRepository.insert(character);
-
-    await this.dataSource.createQueryBuilder()
-      .relation(UserEntity, 'characters')
-      .of(userId)
-      .add(character);
 
     return character;
   }
