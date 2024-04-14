@@ -1,25 +1,5 @@
 version: "3.8"
 services:
-  api:
-    build:
-      dockerfile: Dockerfile.dev
-      context: ./
-    volumes:
-      - ./:/usr/src/spark
-    depends_on:
-      - postgres
-    environment:
-      NODE_ENV: development
-      NX_SKIP_NX_CACHE: "true"
-      DB_URL: postgres://user:password@postgres:5432/db
-      JWT_SECRET: 2C482C4BE1D9236EBD5FFA485FC67
-    expose:
-      - "4200"
-      - "3000"
-    ports:
-      - "4200:4200"
-      - "3000:3000"
-    command: npm run start
   postgres:
     image: postgres:16.2
     environment:

@@ -10,10 +10,13 @@ import { AppController } from './app.controller';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true }),
+    ConfigModule.forRoot({ isGlobal: true, envFilePath: '.env', }),
     TypeOrmModule.forRoot({
       type: 'postgres',
-      url: process.env.DB_URL,
+      password: process.env.POSTGRES_PASSWORD,
+      username: process.env.POSTGRES_USER,
+      database: process.env.POSTGRES_DATABASE,
+      port: Number(process.env.POSTGRES_PORT),
       autoLoadEntities: true,
       synchronize: true
     }),
