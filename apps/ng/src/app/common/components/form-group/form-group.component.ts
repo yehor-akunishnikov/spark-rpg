@@ -23,9 +23,12 @@ export class FormGroupComponent implements AfterContentInit, ControlValueAccesso
   @Input() placeholder = 'e.g. Ricardo';
   @Input() errorsMap: Record<string, string> = {};
   @Input() label = 'Label';
-  @Input() type: 'text' | 'password' | 'number' = 'text';
+  @Input() type: 'text' | 'password' | 'number' | 'range' = 'text';
+  @Input() inputType: 'input' | 'textarea' = 'input';
   @Input() class: string;
   @Input() isSubmitted = true;
+  @Input() min: string = null;
+  @Input() max: string = null;
 
   public control: FormControl;
 

@@ -5,9 +5,9 @@ import { DataSource, DeleteResult, Repository } from 'typeorm';
 
 import { Character } from '@spark-rpg/shared-models';
 
+import { CreateCharacterDto, UpdateCharacterDto } from '../../dto/character.dto';
 import { CharacterEntity } from '../../models/character.entity';
 import { UserEntity } from '../../../user/models/user.entity';
-import { CreateCharacterDto } from '../../dto/character.dto';
 
 @Injectable()
 export class CharacterService {
@@ -30,6 +30,10 @@ export class CharacterService {
     await this.characterRepository.insert(character);
 
     return character;
+  }
+
+  public async update(updateCharacterDto: UpdateCharacterDto): Promise<Character> {
+    return this.characterRepository.save({id: updateCharacterDto.id, ...updateCharacterDto});
   }
 
   public delete(id: string): Promise<DeleteResult> {

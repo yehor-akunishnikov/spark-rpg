@@ -1,15 +1,14 @@
 import { Route } from '@angular/router';
 
-import { CURRENT_USER_DATA_KEY, currentUserResolver } from './data-layers/user/rest/resolvers/current-user.resolver';
+import { CHARACTERS_DATA_KEY, charactersResolver } from './data-layers/character/data/resolvers/characters.resolver';
 import { logoutGuard } from './common/guards/logout.guard';
+import { authGuard } from './common/guards/auth.guard';
 
 export const appRoutes: Route[] = [
   {
     path: '',
     loadComponent: () => import('./layouts/default-layout/default-layout.component').then(m => m.DefaultLayoutComponent),
-    resolve: {
-      [CURRENT_USER_DATA_KEY]: currentUserResolver,
-    },
+    canActivate: [authGuard()],
     children: [
       {
         path: '',
@@ -22,7 +21,28 @@ export const appRoutes: Route[] = [
       },
       {
         path: 'characters',
-        loadComponent: () => import('./pages/characters/characters.component').then(m => m.CharactersComponent),
+        resolve: {
+          [CHARACTERS_DATA_KEY]: charactersResolver,
+        },
+        children: [
+          {
+            path: '',
+            redirectTo: 'list',
+            pathMatch: 'full',
+          },
+          {
+            path: 'list',
+            loadComponent: () => import('./pages/characters/characters.component').then(m => m.CharactersComponent),
+          },
+          {
+            path: 'create',
+            loadComponent: () => import('./pages/character/character.component').then(m => m.CharacterComponent),
+          },
+          {
+            path: 'edit/:id',
+            loadComponent: () => import('./pages/character/character.component').then(m => m.CharacterComponent),
+          },
+        ]
       },
     ],
   },

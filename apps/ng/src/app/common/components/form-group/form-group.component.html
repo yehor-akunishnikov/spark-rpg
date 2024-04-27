@@ -1,15 +1,33 @@
 <div class="mb-1">
-  <label class="mb-0.5 block" [class.required]="errorsMap['required']" [for]="formControlName">{{label}}</label>
+  <label class="mb-0.5 block capitalize" [class.required]="errorsMap['required']" [for]="formControlName">{{label}}</label>
 
   <div>
-    <input
-      class="border rounded w-full px-2 py-1.5"
-      [id]="formControlName"
-      [type]="type"
-      [placeholder]="placeholder"
-      [formControl]="control"
-      [ngClass]="class"
-      [class.border-red-700]="isSubmitted && control.invalid">
+    <ng-container *ngIf="inputType === 'input'">
+      <input
+        class="border border-gray-600 bg-gray-700 rounded w-full px-2 py-1.5"
+        [id]="formControlName"
+        [type]="type"
+        [placeholder]="placeholder"
+        [formControl]="control"
+        [ngClass]="class"
+        [attr.min]="min"
+        [attr.max]="max"
+        autocomplete="off"
+        [class.border-red-700]="isSubmitted && control.invalid">
+    </ng-container>
+
+    <ng-container *ngIf="inputType === 'textarea'">
+      <textarea
+        class="border border-gray-600 bg-gray-700 rounded w-full px-2 py-1.5"
+        [id]="formControlName"
+        [placeholder]="placeholder"
+        [formControl]="control"
+        [ngClass]="class"
+        autocomplete="off"
+        [class.border-red-700]="isSubmitted && control.invalid">
+      </textarea>
+    </ng-container>
+
     <div>
       <app-form-field-error
         [isSubmitted]="isSubmitted"

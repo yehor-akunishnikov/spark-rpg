@@ -19,7 +19,7 @@ export const httpErrorInterceptor: HttpInterceptorFn = (
     catchError((error: HttpErrorResponse) => {
       if (error instanceof HttpErrorResponse) {
         if (error.status === 401) {
-          router.navigateByUrl('/auth/login');
+          router.navigateByUrl('/auth/logout');
         }
       }
 

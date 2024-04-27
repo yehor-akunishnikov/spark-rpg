@@ -49,7 +49,8 @@ export class CharacterEntity {
   biography: string;
 
   @Column({
-    nullable: true
+    nullable: true,
+    type: 'text'
   })
   icon?: string;
 }

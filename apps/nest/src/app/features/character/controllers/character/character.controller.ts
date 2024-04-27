@@ -1,11 +1,11 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Post, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Post, Put, Req, UseGuards } from '@nestjs/common';
 
 import { plainToInstance } from 'class-transformer';
 import { Request } from 'express';
 
 import { Character, User } from '@spark-rpg/shared-models';
 
-import { CharacterResponseDto, CreateCharacterDto } from '../../dto/character.dto';
+import { CharacterResponseDto, CreateCharacterDto, UpdateCharacterDto } from '../../dto/character.dto';
 import { CharacterService } from '../../services/character/character.service';
 import { JwtAuthGuard } from '../../../auth/guards/jwt-auth.guard';
 
@@ -32,6 +32,14 @@ export class CharacterController {
   }>, @Body() createCharacterDto: CreateCharacterDto): Promise<Character> {
     const userId = (request.user as User).id;
     const character = await this.characterService.create(userId, createCharacterDto);
+
+    return plainToInstance(CharacterResponseDto, character);
+  }
+
+  @Put(':id')
+  @UseGuards(JwtAuthGuard)
+  public async update(@Body() updateCharacterDto: UpdateCharacterDto): Promise<Character> {
+    const character = await this.characterService.update(updateCharacterDto);
 
     return plainToInstance(CharacterResponseDto, character);
   }

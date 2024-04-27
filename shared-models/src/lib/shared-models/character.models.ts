@@ -1,5 +1,4 @@
 export interface Character {
-  creator?: string;
   name: string;
   stats: CharacterStats;
   // inventory: Item[];
@@ -7,6 +6,7 @@ export interface Character {
   race: CHARACTER_RACES;
   biography: string;
   icon?: string;
+  id?: string;
 }
 
 export interface CharacterStats {

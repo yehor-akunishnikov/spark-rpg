@@ -1,6 +1,6 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal, WritableSignal } from '@angular/core';
 
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { catchError, Observable, of, tap } from 'rxjs';
 
 import { UserMe } from '@spark-rpg/shared-models';
 
@@ -12,13 +12,13 @@ import { UserRestService } from '../../rest/services/user-rest.service';
 export class UserDataService {
   private userRestService: UserRestService = inject(UserRestService);
 
-  private currentUserState: BehaviorSubject<UserMe> = new BehaviorSubject<UserMe>(null);
-  public currentUser$: Observable<UserMe> = this.currentUserState.asObservable();
+  public currentUser: WritableSignal<UserMe> = signal<UserMe>(null);
 
-  public getCurrent(): Observable<UserMe> {
+  public loadCurrent(): Observable<UserMe> {
     return this.userRestService.getCurrent().pipe(
+      catchError(() => of(null)),
       tap((currentUser) => {
-        this.currentUserState.next(currentUser);
+        this.currentUser.set(currentUser);
       }),
     );
   }

@@ -39,6 +39,12 @@ export class CreateCharacterDto {
   icon?: string;
 }
 
+export class UpdateCharacterDto extends CreateCharacterDto {
+  @IsString()
+  @IsNotEmpty()
+  id: string;
+}
+
 export class CreateCharacterStatsDto {
   @IsNumber() @IsNotEmpty() @Min(0) @Max(10) strength: number;
 
