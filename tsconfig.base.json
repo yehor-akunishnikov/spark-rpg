@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@spark-rpg/dl-packages": ["dl-packages/src/index.ts"],
       "@spark-rpg/shared-models": ["shared-models/src/index.ts"]
     }
   },
