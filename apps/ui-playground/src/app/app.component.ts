@@ -1,10 +1,11 @@
 import { RouterModule } from '@angular/router';
 import { Component } from '@angular/core';
-import { ButtonComponent } from '@spark-rpg/ui-kit';
+
+import { BtnDirective } from '@spark-rpg/ui-kit';
 
 @Component({
   standalone: true,
-  imports: [RouterModule, ButtonComponent],
+  imports: [RouterModule, BtnDirective],
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
