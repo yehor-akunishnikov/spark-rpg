@@ -15,8 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@spark-rpg/dl-packages": ["dl-packages/src/index.ts"],
-      "@spark-rpg/shared-models": ["shared-models/src/index.ts"]
+      "@spark-rpg/dl-packages": ["libs/dl-packages/src/index.ts"],
+      "@spark-rpg/shared-models": ["libs/shared-models/src/index.ts"],
+      "@spark-rpg/ui-kit": ["libs/ui-kit/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

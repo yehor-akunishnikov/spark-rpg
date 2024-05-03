@@ -6,7 +6,8 @@
     "start": "nx run-many --target=serve",
     "build": "nx build ng && nx build nest",
     "dev:server": "nx run nest:serve",
-    "dev:client": "nx run ng:serve"
+    "dev:client": "nx run ng:serve",
+    "dev:ui-playground": "nx run ui-playground:serve"
   },
   "private": true,
   "dependencies": {
