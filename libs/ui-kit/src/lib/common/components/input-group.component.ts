@@ -50,7 +50,7 @@ export class InputGroupComponent {
     }
   };
 
-  @Input() formControlName = '';
+  @Input() formControlName = null;
   @Input() id = '';
   @Input() size: InputGroupSize = 'md';
   @Input() errorsConfig: Record<string, string> = errorsMap;
