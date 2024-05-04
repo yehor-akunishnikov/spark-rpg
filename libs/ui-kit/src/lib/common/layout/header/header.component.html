@@ -1,7 +1,7 @@
 <header class="fixed top-0 left-0 right-0 z-10 shadow-lg">
   <nav class="bg-gray-50 border-b border-gray-200 dark:bg-gray-700 dark:border-gray-500">
     <div class="max-w-screen-2xl flex flex-wrap items-center justify-between mx-auto p-4">
-      <a href="https://flowbite.com/" class="flex items-center space-x-2 rtl:space-x-reverse">
+      <a routerLink="/" class="flex items-center space-x-2 rtl:space-x-reverse hover:opacity-85">
         <svg width="30px" height="30px" viewBox="-33 0 255 255" xmlns="http://www.w3.org/2000/svg"
              preserveAspectRatio="xMidYMid">
           <defs>
@@ -57,7 +57,7 @@
             <li>
               <a
                 [routerLink]="link.url"
-                class="block py-2 px-3 dark:text-white bg-orange-700 rounded md:bg-transparent md:p-0 dark:text-white hover:opacity-80"
+                class="block py-2 px-3 bg-orange-700 rounded md:bg-transparent md:p-0 dark:text-white hover:opacity-80"
                 routerLinkActive="md:text-orange-700 md:dark:text-orange-500"
                 aria-current="page"
               >
@@ -67,7 +67,7 @@
           </ng-container>
         </ul>
 
-        <button (click)="toggleColorMode()" class="p-2 inline-block border border-gray-200 rounded-lg hover:bg-gray-50 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-500">
+        <button (click)="toggleColorMode()" class="p-2 inline-block border border-gray-200 rounded-lg hover:bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-500">
           <ng-container *ngIf="!isDark">
             <svg height="15px" width="15px" id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380.446 380.446">
               <g>
