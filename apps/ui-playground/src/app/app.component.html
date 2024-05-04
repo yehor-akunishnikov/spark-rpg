@@ -1,61 +1,67 @@
-<router-outlet></router-outlet>
+<spark-ui-header></spark-ui-header>
 
-<div>
-  <button (click)="toggleColorTheme()" sparkUiBtn size="sm">Toggle color theme</button>
-</div>
+<spark-ui-main>
+  <router-outlet></router-outlet>
 
-<button sparkUiBtn size="xs">Btn</button>
-<button sparkUiBtn size="sm">Btn</button>
-<button sparkUiBtn size="md">Btn</button>
-<button sparkUiBtn size="lg">Btn</button>
-<button sparkUiBtn size="xl">Btn</button>
+  <div>
+    <button (click)="toggleColorTheme()" sparkUiBtn size="sm">Toggle color theme</button>
+  </div>
 
-<button sparkUiBtn withMode="full" size="xs">Btn</button>
-<button sparkUiBtn withMode="full" size="sm">Btn</button>
-<button sparkUiBtn withMode="full" size="md">Btn</button>
-<button sparkUiBtn withMode="full" size="lg">Btn</button>
-<button sparkUiBtn withMode="full" size="xl">Btn</button>
+  <button sparkUiBtn size="xs">Btn</button>
+  <button sparkUiBtn size="sm">Btn</button>
+  <button sparkUiBtn size="md">Btn</button>
+  <button sparkUiBtn size="lg">Btn</button>
+  <button sparkUiBtn size="xl">Btn</button>
 
-<input type="text" sparkUiInput size="sm" />
-<input type="text" sparkUiInput size="md" />
-<input type="text" sparkUiInput size="lg" />
+  <button sparkUiBtn withMode="full" size="xs">Btn</button>
+  <button sparkUiBtn withMode="full" size="sm">Btn</button>
+  <button sparkUiBtn withMode="full" size="md">Btn</button>
+  <button sparkUiBtn withMode="full" size="lg">Btn</button>
+  <button sparkUiBtn withMode="full" size="xl">Btn</button>
 
-<input type="text" sparkUiInput size="md" disabled />
-<input type="text" sparkUiInput size="md" disabled readonly />
+  <input type="text" sparkUiInput size="sm" />
+  <input type="text" sparkUiInput size="md" />
+  <input type="text" sparkUiInput size="lg" />
 
-<input type="text" sparkUiInput size="sm" [hasError]="true" />
-<input type="text" sparkUiInput size="md" [hasError]="true" />
-<input type="text" sparkUiInput size="lg" [hasError]="true" />
+  <input type="text" sparkUiInput size="md" disabled />
+  <input type="text" sparkUiInput size="md" disabled readonly />
 
-<input type="text" sparkUiInput size="md" [hasError]="true" disabled />
-<input type="text" sparkUiInput size="md" [hasError]="true" disabled readonly />
+  <input type="text" sparkUiInput size="sm" [hasError]="true" />
+  <input type="text" sparkUiInput size="md" [hasError]="true" />
+  <input type="text" sparkUiInput size="lg" [hasError]="true" />
 
-<p sparkUiAlarmText size="xs" color="success">Some success message</p>
-<p sparkUiAlarmText size="sm" color="success">Some success message</p>
-<p sparkUiAlarmText size="md" color="success">Some success message</p>
-<p sparkUiAlarmText size="lg" color="success">Some success message</p>
-<p sparkUiAlarmText size="xl" color="success">Some success message</p>
+  <input type="text" sparkUiInput size="md" [hasError]="true" disabled />
+  <input type="text" sparkUiInput size="md" [hasError]="true" disabled readonly />
 
-<p sparkUiAlarmText size="xs" color="error">Some error message</p>
-<p sparkUiAlarmText size="sm" color="error">Some error message</p>
-<p sparkUiAlarmText size="md" color="error">Some error message</p>
-<p sparkUiAlarmText size="lg" color="error">Some error message</p>
-<p sparkUiAlarmText size="xl" color="error">Some error message</p>
+  <p sparkUiAlarmText size="xs" color="success">Some success message</p>
+  <p sparkUiAlarmText size="sm" color="success">Some success message</p>
+  <p sparkUiAlarmText size="md" color="success">Some success message</p>
+  <p sparkUiAlarmText size="lg" color="success">Some success message</p>
+  <p sparkUiAlarmText size="xl" color="success">Some success message</p>
 
-<form [formGroup]="inputGroupForm">
-  <spark-ui-input-group formControlName="one" size="sm" />
-  <spark-ui-input-group formControlName="two" size="md" />
-  <spark-ui-input-group formControlName="three" size="lg" />
-</form>
+  <p sparkUiAlarmText size="xs" color="error">Some error message</p>
+  <p sparkUiAlarmText size="sm" color="error">Some error message</p>
+  <p sparkUiAlarmText size="md" color="error">Some error message</p>
+  <p sparkUiAlarmText size="lg" color="error">Some error message</p>
+  <p sparkUiAlarmText size="xl" color="error">Some error message</p>
 
-<spark-ui-card>
-  <spark-ui-card-header>1</spark-ui-card-header>
-  <spark-ui-card-body>
-    <form [formGroup]="inputGroupForm">
-      <spark-ui-input-group label="Some label" formControlName="one" size="sm" />
-      <spark-ui-input-group label="Some label" formControlName="two" size="md" />
-      <spark-ui-input-group label="Some label" formControlName="three" size="lg" />
-    </form>
-  </spark-ui-card-body>
-  <spark-ui-card-footer>3</spark-ui-card-footer>
-</spark-ui-card>
+  <form [formGroup]="inputGroupForm">
+    <spark-ui-input-group formControlName="one" size="sm" />
+    <spark-ui-input-group formControlName="two" size="md" />
+    <spark-ui-input-group formControlName="three" size="lg" />
+  </form>
+
+  <spark-ui-card>
+    <spark-ui-card-header>1</spark-ui-card-header>
+    <spark-ui-card-body>
+      <form [formGroup]="inputGroupForm">
+        <spark-ui-input-group label="Some label" formControlName="one" size="sm" />
+        <spark-ui-input-group label="Some label" formControlName="two" size="md" />
+        <spark-ui-input-group label="Some label" formControlName="three" size="lg" />
+      </form>
+    </spark-ui-card-body>
+    <spark-ui-card-footer>3</spark-ui-card-footer>
+  </spark-ui-card>
+</spark-ui-main>
+
+<spark-ui-footer></spark-ui-footer>

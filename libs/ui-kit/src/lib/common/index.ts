@@ -9,3 +9,7 @@ export * from './components/card/card.component';
 export * from './components/card/card-header/card-header.component';
 export * from './components/card/card-body/card-body.component';
 export * from './components/card/card-footer/card-footer.component';
+
+export * from './layout/header/header.component';
+export * from './layout/footer/footer.component';
+export * from './layout/main/main.component';
