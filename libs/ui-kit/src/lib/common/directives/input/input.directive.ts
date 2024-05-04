@@ -2,7 +2,7 @@ import { Directive, HostBinding, Input } from '@angular/core';
 
 export const inputColorsMap = {
   default: 'border-gray-300 bg-gray-50 focus:ring-orange-500 focus:border-orange-500' +
-    ' dark:bg-gray-700 dark:border-gray-600 dark:text-white' +
+    ' dark:bg-gray-700 dark:border-gray-500 dark:text-white' +
     ' dark:focus:ring-orange-500 dark:focus:border-orange-500' +
     ' disabled:bg-gray-100 dark:disabled:bg-gray-600' +
     ' dark:disabled:border-gray-500',

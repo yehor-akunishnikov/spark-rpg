@@ -9,11 +9,11 @@ export const btnColorsMap = {
 };
 
 export const btnSizesMap = {
-  xs: 'px-4 py-2 text-xs',
-  sm: 'px-4 py-2 text-sm',
-  md: 'px-5 py-2.5 text-sm',
-  lg: 'px-6 py-3 text-base',
-  xl: 'px-7 py-3.5 text-base'
+  xs: 'px-5 py-1.5 text-xs',
+  sm: 'px-7 py-1.5 text-sm',
+  md: 'px-8 py-2 text-sm',
+  lg: 'px-9 py-2.5 text-base',
+  xl: 'px-11 py-3.5 text-base'
 };
 
 export const btnWidthModesMap = {

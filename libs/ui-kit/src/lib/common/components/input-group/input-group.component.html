@@ -5,23 +5,23 @@
     [color]="ngControl.invalid && ngControl.touched ? 'error' : 'default'"
     [size]="size"
   >
-    Some text
+    {{label}}
   </label>
 
   <input
     [formControl]="ngControl.control"
     [id]="formControlName ?? id"
     [name]="formControlName ?? id"
-    type="text"
+    [type]="type"
     sparkUiInput
     [size]="size"
     [hasError]="ngControl.invalid && ngControl.touched"
   />
 
   <ng-container *ngIf="ngControl.invalid && ngControl.touched">
-    <p
+    <div
       class="absolute left-0"
-      [ngClass]="spacingClassesMap[size].container"
+      [ngClass]="spacingClassesMap[size].error"
       sparkUiAlarmText
       color="error"
       [size]="size"
@@ -31,6 +31,6 @@
           {{errorsConfigItem.value}}
         </ng-container>
       </ng-container>
-    </p>
+    </div>
   </ng-container>
 </div>

@@ -47,3 +47,15 @@
   <spark-ui-input-group formControlName="two" size="md" />
   <spark-ui-input-group formControlName="three" size="lg" />
 </form>
+
+<spark-ui-card>
+  <spark-ui-card-header>1</spark-ui-card-header>
+  <spark-ui-card-body>
+    <form [formGroup]="inputGroupForm">
+      <spark-ui-input-group label="Some label" formControlName="one" size="sm" />
+      <spark-ui-input-group label="Some label" formControlName="two" size="md" />
+      <spark-ui-input-group label="Some label" formControlName="three" size="lg" />
+    </form>
+  </spark-ui-card-body>
+  <spark-ui-card-footer>3</spark-ui-card-footer>
+</spark-ui-card>
