@@ -1,11 +1,11 @@
-import { RouterLinkActive } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 
 @Component({
   selector: 'spark-ui-header',
   standalone: true,
-  imports: [CommonModule, RouterLinkActive],
+  imports: [CommonModule, RouterLinkActive, RouterLink],
   templateUrl: './header.component.html'
 })
 export class HeaderComponent {

@@ -7,11 +7,6 @@ export const appRoutes: Route[] = [
     children: [
       {
         path: '',
-        redirectTo: 'home',
-        pathMatch: 'full',
-      },
-      {
-        path: 'home',
         loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent),
       },
     ],
