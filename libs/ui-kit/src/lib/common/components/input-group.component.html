@@ -1,0 +1,36 @@
+<div class="relative" [ngClass]="spacingClassesMap[size].container">
+  <label
+    [for]="formControlName ?? id"
+    sparkUiAlarmText
+    [color]="ngControl.invalid && ngControl.touched ? 'error' : 'default'"
+    [size]="size"
+  >
+    Some text
+  </label>
+
+  <input
+    [formControl]="ngControl.control"
+    [id]="formControlName ?? id"
+    [name]="formControlName ?? id"
+    type="text"
+    sparkUiInput
+    [size]="size"
+    [hasError]="ngControl.invalid && ngControl.touched"
+  />
+
+  <ng-container *ngIf="ngControl.invalid && ngControl.touched">
+    <p
+      class="absolute left-0"
+      [ngClass]="spacingClassesMap[size].container"
+      sparkUiAlarmText
+      color="error"
+      [size]="size"
+    >
+      <ng-container *ngFor="let errorsConfigItem of errorsConfig | keyvalue">
+        <ng-container *ngIf="ngControl.hasError(errorsConfigItem.key)">
+          {{errorsConfigItem.value}}
+        </ng-container>
+      </ng-container>
+    </p>
+  </ng-container>
+</div>

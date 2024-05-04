@@ -1,15 +1,24 @@
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { Component } from '@angular/core';
 
-import { BtnDirective } from '@spark-rpg/ui-kit';
+import { AlarmTextDirective, BtnDirective, InputDirective, InputGroupComponent } from '@spark-rpg/ui-kit';
 
 @Component({
   standalone: true,
-  imports: [RouterModule, BtnDirective],
+  imports: [RouterModule, BtnDirective, InputDirective, AlarmTextDirective, InputGroupComponent, ReactiveFormsModule],
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  title = 'ui-playground';
+  inputGroupForm = new FormGroup({
+    one: new FormControl('', [Validators.required]),
+    two: new FormControl('', [Validators.required]),
+    three: new FormControl('', [Validators.required]),
+  });
+
+  toggleColorTheme() {
+    document.querySelector('html').classList.toggle('dark');
+  }
 }
