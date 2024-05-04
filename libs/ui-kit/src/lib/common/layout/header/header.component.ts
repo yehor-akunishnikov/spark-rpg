@@ -23,4 +23,11 @@ export class HeaderComponent {
       text: 'Dummy'
     }
   ];
+
+  public isDark = true;
+
+  public toggleColorMode(): void {
+    document.querySelector('html')?.classList?.toggle('dark');
+    this.isDark = !this.isDark;
+  }
 }
