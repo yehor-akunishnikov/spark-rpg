@@ -7,7 +7,22 @@ export const appRoutes: Route[] = [
     children: [
       {
         path: '',
-        loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent),
+        pathMatch: 'full',
+        redirectTo: 'home'
+      },
+      {
+        path: 'home',
+        loadComponent: () => import('./pages/home/home-page.component').then(m => m.HomePageComponent),
+      },
+      {
+        path: 'characters',
+        loadComponent: () => import('./pages/characters/characters-page.component').then(m => m.CharactersPageComponent),
+        children: [
+          {
+            path: ':id',
+            loadComponent: () => import('./pages/characters/character/character-page.component').then(m => m.CharacterPageComponent)
+          }
+        ]
       },
     ],
   },

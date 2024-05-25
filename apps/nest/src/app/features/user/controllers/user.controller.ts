@@ -48,7 +48,7 @@ export class UserController {
     return plainToInstance(UserProfileResponseDto, user);
   }
 
-  @Delete(':id')
+  @Delete(':character')
   @HttpCode(HttpStatus.OK)
   public async delete(@Param('id') id: string): Promise<void> {
     await this.userService.delete(id);

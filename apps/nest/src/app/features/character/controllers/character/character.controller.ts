@@ -36,7 +36,7 @@ export class CharacterController {
     return plainToInstance(CharacterResponseDto, character);
   }
 
-  @Put(':id')
+  @Put(':character')
   @UseGuards(JwtAuthGuard)
   public async update(@Body() updateCharacterDto: UpdateCharacterDto): Promise<Character> {
     const character = await this.characterService.update(updateCharacterDto);
@@ -44,7 +44,7 @@ export class CharacterController {
     return plainToInstance(CharacterResponseDto, character);
   }
 
-  @Delete(':id')
+  @Delete(':character')
   @UseGuards(JwtAuthGuard)
   @HttpCode(HttpStatus.OK)
   public async delete(@Param('id') id: string): Promise<void> {

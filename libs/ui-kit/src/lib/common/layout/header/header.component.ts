@@ -11,12 +11,12 @@ import { Component } from '@angular/core';
 export class HeaderComponent {
   readonly links = [
     {
-      url: '/',
+      url: '/home',
       text: 'Home'
     },
     {
-      url: '#',
-      text: 'Dummy'
+      url: '/characters',
+      text: 'Characters'
     },
     {
       url: '#',
