@@ -18,6 +18,8 @@ export const errorsMap: Record<string, string> = {
   required: 'This field is required',
 };
 
+export type ErrorsMap = Record<string, string>;
+
 @Component({
   selector: 'spark-ui-input-group',
   standalone: true,

@@ -1,8 +1,10 @@
 <div class="mt-[74px] md:mt-[66px]">
-  <spark-ui-header [links]="headerLinks" />
+  <spark-ui-header [links]="headerLinks$ | async" />
 
   <spark-ui-main [layoutType]="LAYOUT_TYPES.AUTH">
-    <router-outlet></router-outlet>
+    <div class="w-full md:w-1/2 p-4">
+      <router-outlet></router-outlet>
+    </div>
   </spark-ui-main>
 
   <spark-ui-footer />

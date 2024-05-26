@@ -1,1 +1,53 @@
-<p>auth-form works!</p>
+<form class="w-full" [formGroup]="authForm" (ngSubmit)="onSubmit(authForm)">
+  <spark-ui-card>
+    <spark-ui-card-header>
+      <h1 class="text-center text-xl border border-gray-300 dark:border-gray-400 bg-gray-50 dark:bg-gray-600 rounded py-2 px-3">
+        {{formTitle}}
+      </h1>
+    </spark-ui-card-header>
+    <spark-ui-card-body>
+      <div class="mb-6">
+        <spark-ui-input-group
+          [errorsConfig]="usernameErrorsConfig"
+          formControlName="username"
+          label="Username"
+          size="sm"
+        />
+      </div>
+
+      <div>
+        <spark-ui-input-group
+          [errorsConfig]="passwordErrorsConfig"
+          formControlName="password"
+          label="Password"
+          size="sm"
+        />
+      </div>
+    </spark-ui-card-body>
+    <spark-ui-card-footer>
+      <div class="mb-1">
+        <button type="submit" sparkUiBtn withMode="full">
+          Submit
+        </button>
+      </div>
+
+      <ng-container [ngSwitch]="authAction">
+        <ng-container *ngSwitchCase="AUTH_ACTIONS.REGISTER">
+          <a class="text-orange-400 underline text-center w-full block text-sm"
+             [routerLink]="['/', APP_ROUTES.AUTH , APP_ROUTES.LOGIN]"
+          >
+            Already have an account?
+          </a>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="AUTH_ACTIONS.LOGIN">
+          <a class="text-orange-400 underline text-center w-full block text-sm"
+             [routerLink]="['/', APP_ROUTES.AUTH , APP_ROUTES.REGISTER]"
+          >
+            Don't have an account yet?
+          </a>
+        </ng-container>
+      </ng-container>
+    </spark-ui-card-footer>
+  </spark-ui-card>
+</form>

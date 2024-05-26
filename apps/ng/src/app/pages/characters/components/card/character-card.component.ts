@@ -20,7 +20,7 @@ import { APP_ROUTES } from '../../../../app.routes';
     RouterLink
   ],
   templateUrl: './character-card.component.html',
-  styleUrl: './character-card.component.css',
+  styleUrl: './character-card.component.scss',
 })
 export class CharacterCardComponent {
   readonly APP_ROUTES = APP_ROUTES;

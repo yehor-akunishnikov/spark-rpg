@@ -1,12 +1,13 @@
 <div class="relative" [ngClass]="spacingClassesMap[size].container">
-  <label
-    [for]="formControlName ?? id"
-    sparkUiAlarmText
-    [color]="ngControl.invalid && ngControl.touched ? 'error' : 'default'"
-    [size]="size"
-  >
-    {{label}}
-  </label>
+  <div class="mb-1">
+    <label
+      [for]="formControlName ?? id"
+      sparkUiAlarmText
+      [size]="size"
+    >
+      {{label}}
+    </label>
+  </div>
 
   <input
     [formControl]="ngControl.control"

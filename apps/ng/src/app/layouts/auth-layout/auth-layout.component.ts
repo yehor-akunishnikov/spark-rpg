@@ -1,7 +1,11 @@
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Component } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
+
+import { map, Observable } from 'rxjs';
 
 import { FooterComponent, HeaderComponent, HeaderNavLink, LAYOUT_TYPES, MainComponent } from '@spark-rpg/ui-kit';
+import { RouterDataService } from '@spark-rpg/dl-packages';
 
 import { APP_ROUTES } from '../../app.routes';
 
@@ -12,17 +16,39 @@ import { APP_ROUTES } from '../../app.routes';
     FooterComponent,
     HeaderComponent,
     MainComponent,
-    RouterOutlet
+    RouterOutlet,
+    AsyncPipe
   ],
   templateUrl: './auth-layout.component.html',
   styleUrl: './auth-layout.component.scss'
 })
 export class AuthLayoutComponent {
+  private readonly _routerDataService: RouterDataService = inject(RouterDataService);
+
   readonly LAYOUT_TYPES = LAYOUT_TYPES;
-  readonly headerLinks: HeaderNavLink[] = [
-    {
-      url: `/${APP_ROUTES.HOME}`,
-      text: 'Home'
-    },
-  ];
+  headerLinks$: Observable<HeaderNavLink[]> = this._getHeaderLinks();
+
+  private _getHeaderLinks(): Observable<HeaderNavLink[]> {
+    return this._routerDataService.currentUrl$.pipe(
+      map(currentUrl => {
+        let links: HeaderNavLink[] = [
+          { url: `/${APP_ROUTES.HOME}`, text: 'Home'}
+        ];
+
+        if (currentUrl.includes(APP_ROUTES.LOGOUT)) {
+          links = [];
+        }
+
+        if (currentUrl.includes(APP_ROUTES.LOGIN)) {
+          links.push({ url: `/${APP_ROUTES.AUTH}/${APP_ROUTES.REGISTER}`, text: 'Register' });
+        }
+
+        if (currentUrl.includes(APP_ROUTES.REGISTER)) {
+          links.push({ url: `/${APP_ROUTES.AUTH}/${APP_ROUTES.LOGIN}`, text: 'Login' });
+        }
+
+        return links;
+      })
+    );
+  }
 }

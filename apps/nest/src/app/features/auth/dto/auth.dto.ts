@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString, IsStrongPassword } from 'class-validator';
+import { IsNotEmpty, IsString, IsStrongPassword, MaxLength, MinLength } from 'class-validator';
 
 export class LoginRequestDto {
   @IsNotEmpty()
@@ -13,6 +13,8 @@ export class LoginRequestDto {
 export class RegisterRequestDto {
   @IsNotEmpty()
   @IsString()
+  @MinLength(3)
+  @MaxLength(10)
   username: string;
 
   @IsNotEmpty()
