@@ -5,7 +5,13 @@ export const btnColorsMap = {
     ' bg-orange-600' +
     ' hover:bg-orange-500 focus-visible:ring-orange-400 active:bg-orange-600' +
     ' dark:bg-orange-600' +
-    ' dark:hover:bg-orange-500 dark:focus-visible:ring-orange-300 dark:active:bg-orange-600'
+    ' dark:hover:bg-orange-500 dark:focus-visible:ring-orange-300 dark:active:bg-orange-600',
+
+    danger: 'text-white border-red-700' +
+    ' bg-red-600' +
+    ' hover:bg-red-500 focus-visible:ring-red-400 active:bg-red-600' +
+    ' dark:bg-red-600' +
+    ' dark:hover:bg-red-500 dark:focus-visible:ring-red-300 dark:active:bg-red-600'
 };
 
 export const btnSizesMap = {
@@ -21,10 +27,11 @@ export const btnWidthModesMap = {
   full: 'block w-full'
 };
 
-export type BtnColor = 'primary';
+export type BtnColor = 'primary' | 'danger';
 
 export enum BTN_COLORS {
-  PRIMARY = 'primary'
+  PRIMARY = 'primary',
+  DANGER = 'danger'
 }
 
 export type BtnSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';

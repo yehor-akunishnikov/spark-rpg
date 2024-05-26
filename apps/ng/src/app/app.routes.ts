@@ -1,5 +1,10 @@
 import { Route } from '@angular/router';
 
+export enum APP_ROUTES {
+  HOME = '/home',
+  CHARACTERS = '/characters'
+}
+
 export const appRoutes: Route[] = [
   {
     path: '',
@@ -15,14 +20,12 @@ export const appRoutes: Route[] = [
         loadComponent: () => import('./pages/home/home-page.component').then(m => m.HomePageComponent),
       },
       {
+        path: 'characters/:id',
+        loadComponent: () => import('./pages/characters/character/character-page.component').then(m => m.CharacterPageComponent)
+      },
+      {
         path: 'characters',
         loadComponent: () => import('./pages/characters/characters-page.component').then(m => m.CharactersPageComponent),
-        children: [
-          {
-            path: ':id',
-            loadComponent: () => import('./pages/characters/character/character-page.component').then(m => m.CharacterPageComponent)
-          }
-        ]
       },
     ],
   },

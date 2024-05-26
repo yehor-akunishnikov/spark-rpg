@@ -1,14 +1,17 @@
 import { provideRouter, withComponentInputBinding } from '@angular/router';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideHttpClient, withFetch } from '@angular/common/http';
+import { provideImageKitLoader } from '@angular/common';
 import { ApplicationConfig } from '@angular/core';
 
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideStore } from '@ngrx/store';
 
-import { appRoutes } from './app.routes';
-import { provideEffects } from '@ngrx/effects';
 import { provideRouterStore } from '@ngrx/router-store';
+import { provideEffects } from '@ngrx/effects';
+
+import { environment } from '../environments/environment';
+import { appRoutes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -19,6 +22,7 @@ export const appConfig: ApplicationConfig = {
     provideStore(),
     provideRouterStore(),
     provideStoreDevtools(),
-    provideEffects([])
+    provideEffects([]),
+    provideImageKitLoader(environment.imgCdnPrlEndpoint)
   ]
 };
