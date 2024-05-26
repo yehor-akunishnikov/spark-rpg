@@ -12,12 +12,13 @@
         alt="Character icon"
         width="1200"
         height="656"
-      />
+        priority=""
+      >
     </div>
   </spark-ui-card-body>
 
   <spark-ui-card-footer>
-    <a [routerLink]="APP_ROUTES.CHARACTERS + '/id'" sparkUiBtn withMode="full">
+    <a [routerLink]="['/', APP_ROUTES.CHARACTERS, 'id']" sparkUiBtn withMode="full">
       More info
     </a>
   </spark-ui-card-footer>

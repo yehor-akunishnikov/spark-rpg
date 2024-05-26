@@ -1,9 +1,0 @@
-.main-container {
-  min-height: calc(100vh - 131px);
-}
-
-@media screen and (min-width: 768px) {
-  .main-container {
-    min-height: calc(100vh - 119px);
-  }
-}

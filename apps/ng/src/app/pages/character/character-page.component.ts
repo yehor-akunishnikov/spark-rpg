@@ -15,6 +15,6 @@ import { BtnDirective, CardBodyComponent, CardComponent, CardFooterComponent, Ca
     NgOptimizedImage
   ],
   templateUrl: './character-page.component.html',
-  styleUrl: './character-page.component.css',
+  styleUrl: './character-page.component.scss',
 })
 export class CharacterPageComponent {}

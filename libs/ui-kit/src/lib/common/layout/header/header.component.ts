@@ -1,6 +1,11 @@
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+
+export interface HeaderNavLink {
+  url: string;
+  text: string;
+}
 
 @Component({
   selector: 'spark-ui-header',
@@ -9,20 +14,7 @@ import { Component } from '@angular/core';
   templateUrl: './header.component.html'
 })
 export class HeaderComponent {
-  readonly links = [
-    {
-      url: '/home',
-      text: 'Home'
-    },
-    {
-      url: '/characters',
-      text: 'Characters'
-    },
-    {
-      url: '#',
-      text: 'Dummy'
-    }
-  ];
+  @Input() links: HeaderNavLink[] = [];
 
   public isDark = true;
 

@@ -7,6 +7,6 @@ import { CharacterCardComponent } from './components/card/character-card.compone
   standalone: true,
   imports: [CommonModule, CharacterCardComponent],
   templateUrl: './characters-page.component.html',
-  styleUrl: './characters-page.component.css',
+  styleUrl: './characters-page.component.scss',
 })
 export class CharactersPageComponent {}

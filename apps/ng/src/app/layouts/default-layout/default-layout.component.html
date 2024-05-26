@@ -1,7 +1,13 @@
-<spark-ui-header />
+<div class="mt-[74px] md:mt-[66px]">
+  <spark-ui-header [links]="headerLinks" />
 
-<spark-ui-main>
-  <router-outlet></router-outlet>
-</spark-ui-main>
+  <spark-ui-main>
+    <div class="px-4 py-10">
+      <div class="w-full max-w-screen-2xl mx-auto">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </spark-ui-main>
 
-<spark-ui-footer />
+  <spark-ui-footer />
+</div>
