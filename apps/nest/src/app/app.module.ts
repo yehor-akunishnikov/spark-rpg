@@ -3,7 +3,6 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 
-import { CharacterModule } from './features/character/character.module';
 import { UserModule } from './features/user/user.module';
 import { AuthModule } from './features/auth/auth.module';
 import { AppController } from './app.controller';
@@ -21,8 +20,7 @@ import { AppController } from './app.controller';
       synchronize: true
     }),
     UserModule,
-    AuthModule,
-    CharacterModule
+    AuthModule
   ],
   controllers: [AppController],
 })
