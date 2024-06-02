@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+
+import { InteractiveMapComponent, MapData, maps, MAP_NAMES } from '@spark-rpg/interactive-map';
 
 @Component({
   selector: 'app-home',
@@ -7,8 +8,10 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
   imports: [
-    RouterOutlet
+    InteractiveMapComponent
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HomePageComponent { }
+export class HomePageComponent {
+  readonly mapData: MapData = maps[MAP_NAMES.OAKVALE];
+}

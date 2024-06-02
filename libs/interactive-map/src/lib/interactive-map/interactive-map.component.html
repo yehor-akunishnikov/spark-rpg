@@ -1,0 +1,18 @@
+<div class="relative rounded-md overflow-hidden inline-block">
+  <canvas
+    class="relative z-10 cursor-pointer"
+    [height]="canvasSize"
+    [width]="canvasSize"
+    #canvas
+  >
+  </canvas>
+
+  <div #background class="absolute top-0 left-0 w-full">
+    <spark-ui-svg-drawer
+      [mapData]="mapData"
+      [size]="canvasSize"
+      fill="#DED6A7"
+      viewBox="0 0 500 500"
+    />
+  </div>
+</div>

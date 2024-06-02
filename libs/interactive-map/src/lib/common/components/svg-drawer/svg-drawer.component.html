@@ -1,0 +1,60 @@
+<ng-container *ngIf="mapData">
+  <svg xmlns="http://www.w3.org/2000/svg"
+    [attr.width]="size"
+    [attr.height]="size"
+    [attr.viewBox]="viewBox"
+    [attr.fill]="fill"
+  >
+    <rect
+      [attr.x]="mapData.background.rect.x"
+      [attr.y]="mapData.background.rect.y"
+      [attr.width]="mapData.background.rect.width"
+      [attr.height]="mapData.background.rect.height"
+      [attr.fill]="mapData.background.rect.fill"
+    />
+
+    <path
+      #road
+      [attr.d]="mapData.road.path.d"
+      [attr.stroke-width]="mapData.road.path.strokeWidth"
+      [attr.stroke]="mapData.road.path.stroke"
+      [attr.fill]="mapData.road.path.fill"
+      [attr.fill-rule]="mapData.road.path.fillRule"
+      [attr.clip-rule]="mapData.road.path.clipRule"
+      [attr.id]="mapData.road.path.id"
+    />
+
+    <ng-container *ngFor="let svgData of mapData.svgDataList">
+      <ng-container [ngSwitch]="svgData.type">
+        <ng-container *ngSwitchCase="SVG_MAP_DATA_ELEMENT_TYPES.CIRCLE">
+          <circle
+            [attr.cx]="svgData['circle'].cx"
+            [attr.cy]="svgData['circle'].cy"
+            [attr.r]="svgData['circle'].r"
+            [attr.fill]="svgData['circle'].fill"
+          />
+        </ng-container>
+        <ng-container *ngSwitchCase="SVG_MAP_DATA_ELEMENT_TYPES.PATH">
+          <path
+            [attr.d]="svgData['path'].d"
+            [attr.stroke-width]="svgData['path'].strokeWidth"
+            [attr.stroke]="svgData['path'].stroke"
+            [attr.fill]="svgData['path'].fill"
+            [attr.fill-rule]="svgData['path'].fillRule"
+            [attr.clip-rule]="svgData['path'].clipRule"
+            [attr.id]="svgData['path'].id"
+          />
+        </ng-container>
+        <ng-container *ngSwitchCase="SVG_MAP_DATA_ELEMENT_TYPES.RECT">
+          <rect
+            [attr.x]="svgData['rect'].x"
+            [attr.y]="svgData['rect'].y"
+            [attr.width]="svgData['rect'].width"
+            [attr.height]="svgData['rect'].height"
+            [attr.fill]="svgData['rect'].fill"
+          />
+        </ng-container>
+      </ng-container>
+    </ng-container>
+  </svg>
+</ng-container>
