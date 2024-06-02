@@ -1,9 +1,7 @@
 import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { NgForOf, NgIf, NgSwitch, NgSwitchCase } from '@angular/common';
 
-import { MapData, SVG_MAP_DATA_ELEMENT_TYPES } from '../../models';
-import { fromEvent, map } from 'rxjs';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Map, SVG_MAP_DATA_ELEMENT_TYPES } from '@spark-rpg/shared-models';
 
 @Component({
   selector: 'spark-ui-svg-drawer',
@@ -20,7 +18,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 export class SvgDrawerComponent implements AfterViewInit {
   readonly SVG_MAP_DATA_ELEMENT_TYPES = SVG_MAP_DATA_ELEMENT_TYPES;
 
-  @Input() mapData: MapData | null = null;
+  @Input() map: Map | null = null;
   @Input() size: number;
   @Input() fill: string;
   @Input() viewBox: string;

@@ -44,12 +44,24 @@ export type SvgMapDataRect = {
 
 export type SvgMapDataElement = SvgMapDataPath | SvgMapDataCircle | SvgMapDataRect;
 
-export interface MapData {
+export interface MapMetadata {
+  id: string;
+  name: string;
+  gameTerritory: string[];
+}
+
+export interface MapUIData {
   name: MAP_NAMES;
   svgDataList: SvgMapDataElement[];
   background: SvgMapDataRect;
   road: SvgMapDataPath;
-  gameTerritory: (number | [number, number])[][];
+}
+
+export interface Map {
+  id: string;
+  name: string;
+  gameTerritory: string[];
+  uiData: MapUIData;
 }
 
 export interface MapAreaCoordinates {

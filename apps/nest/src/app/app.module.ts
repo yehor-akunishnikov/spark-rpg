@@ -5,6 +5,7 @@ import { ConfigModule } from '@nestjs/config';
 
 import { UserModule } from './features/user/user.module';
 import { AuthModule } from './features/auth/auth.module';
+import { MapModule } from './features/map/map.module';
 import { AppController } from './app.controller';
 
 @Module({
@@ -20,7 +21,8 @@ import { AppController } from './app.controller';
       synchronize: true
     }),
     UserModule,
-    AuthModule
+    AuthModule,
+    MapModule
   ],
   controllers: [AppController],
 })

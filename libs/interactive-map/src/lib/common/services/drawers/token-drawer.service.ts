@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 
+import { Map, MapPointCoordinates } from '@spark-rpg/shared-models';
+
 import { InteractiveMapComponent } from '../../../interactive-map/interactive-map.component';
-import { MapData, MapPointCoordinates } from '../../models';
 
 @Injectable({
   providedIn: InteractiveMapComponent
@@ -11,10 +12,16 @@ export class TokenDrawerService {
   private _ctx: CanvasRenderingContext2D;
   private _canvasSize: number;
 
-  public setCanvasData(canvas: HTMLCanvasElement, mapData: MapData): void {
+  public setCanvasData(canvas: HTMLCanvasElement, map: Map): void {
     this._ctx = canvas.getContext('2d');
     this._canvasSize = canvas.width;
-    this._gameTerritory = mapData.gameTerritory;
+    this._gameTerritory = map.gameTerritory.map(row => {
+      return row.split(';').map(cell => {
+        const cellData = cell.split('.').map(cellDataItem => Number(cellDataItem));
+
+        return cellData.length === 1 ? cellData[0] : [cellData[0], cellData[1]];
+      });
+    });
   }
 
   drawPin({x, y}: MapPointCoordinates): void {

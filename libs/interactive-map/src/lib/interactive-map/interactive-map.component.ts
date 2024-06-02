@@ -4,9 +4,10 @@ import { NgOptimizedImage } from '@angular/common';
 
 import { fromEvent } from 'rxjs';
 
+import { Map, MapPointCoordinates } from '@spark-rpg/shared-models';
+
 import { SvgDrawerComponent } from '../common/components/svg-drawer/svg-drawer.component';
 import { TokenDrawerService } from '../common/services/drawers/token-drawer.service';
-import { MapData, MapPointCoordinates } from '../common/models';
 
 @Component({
   selector: 'spark-ui-interactive-map',
@@ -25,7 +26,7 @@ export class InteractiveMapComponent implements AfterViewInit {
   private readonly _tokenDrawerService: TokenDrawerService = inject(TokenDrawerService);
   private readonly _destroyRef: DestroyRef = inject(DestroyRef);
 
-  @Input() mapData: MapData | null = null;
+  @Input() map: Map | null = null;
   @Input() canvasSize = 500;
 
   @ViewChild('canvas') private readonly _canvas: ElementRef<HTMLCanvasElement>;
@@ -34,7 +35,7 @@ export class InteractiveMapComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     const canvasElement = this._canvas.nativeElement;
 
-    this._tokenDrawerService.setCanvasData(canvasElement, this.mapData);
+    this._tokenDrawerService.setCanvasData(canvasElement, this.map);
 
     fromEvent(canvasElement, 'click').pipe(
       takeUntilDestroyed(this._destroyRef)
