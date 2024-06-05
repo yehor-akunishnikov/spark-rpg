@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 
+import { GameTerritoryRowItem } from '@spark-rpg/shared-models';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -7,8 +9,8 @@ export class BoundariesMapProcessorService {
   getRoadBoundariesMap(
     canvasSize: number,
     canvasContext: CanvasRenderingContext2D
-  ): (number | [number, number])[][] {
-    const boundariesMap: (number | [number, number])[][] = [];
+  ): GameTerritoryRowItem[][] {
+    const boundariesMap: GameTerritoryRowItem[][] = [];
 
     for (let y = 0; y < canvasSize; y++) {
       const row = [];

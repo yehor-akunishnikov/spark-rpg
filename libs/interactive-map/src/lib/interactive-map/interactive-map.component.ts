@@ -1,11 +1,16 @@
-import { AfterViewInit, Component, DestroyRef, ElementRef, inject, Input, ViewChild } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import {
+  AfterViewInit, ChangeDetectionStrategy, Component, ElementRef,
+  EventEmitter, inject, Input, OnChanges, Output, SimpleChanges,
+  ViewChild
+} from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
 
-import { fromEvent } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 
-import { Map, MapPointCoordinates } from '@spark-rpg/shared-models';
+import { MapLocation, UIMap } from '@spark-rpg/shared-models';
 
+import { PlayerMovementTrackerService } from '../common/services/trackers/player-movement-tracker.service';
+import { CoordinateUtilsService } from '../common/services/coorditate-utils/coordinate-utils.service';
 import { SvgDrawerComponent } from '../common/components/svg-drawer/svg-drawer.component';
 import { TokenDrawerService } from '../common/services/drawers/token-drawer.service';
 
@@ -17,38 +22,63 @@ import { TokenDrawerService } from '../common/services/drawers/token-drawer.serv
     NgOptimizedImage,
   ],
   providers: [
-    TokenDrawerService
+    TokenDrawerService,
+    CoordinateUtilsService,
+    PlayerMovementTrackerService,
   ],
   templateUrl: './interactive-map.component.html',
   styleUrl: './interactive-map.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class InteractiveMapComponent implements AfterViewInit {
+export class InteractiveMapComponent implements AfterViewInit, OnChanges {
+  private readonly _userMovementTrackerService: PlayerMovementTrackerService = inject(PlayerMovementTrackerService);
   private readonly _tokenDrawerService: TokenDrawerService = inject(TokenDrawerService);
-  private readonly _destroyRef: DestroyRef = inject(DestroyRef);
 
-  @Input() map: Map | null = null;
+  private readonly _resetSubscriptionsSteam$: Subject<void> = new Subject<void>();
+
+  @Input() map: UIMap | null = null;
   @Input() canvasSize = 500;
+
+  @Output() locationChanged: EventEmitter<MapLocation> = new EventEmitter<MapLocation>();
 
   @ViewChild('canvas') private readonly _canvas: ElementRef<HTMLCanvasElement>;
   @ViewChild('background') private readonly _background: ElementRef<HTMLDivElement>;
 
-  ngAfterViewInit(): void {
-    const canvasElement = this._canvas.nativeElement;
-
-    this._tokenDrawerService.setCanvasData(canvasElement, this.map);
-
-    fromEvent(canvasElement, 'click').pipe(
-      takeUntilDestroyed(this._destroyRef)
-    ).subscribe((event: MouseEvent) => {
-      this._tokenDrawerService.drawPin(this._getCoordinatesFromEvent(event));
-    });
+  ngOnChanges(changes: SimpleChanges): void {
+    if (!changes['map']?.firstChange) {
+      this._initMap();
+    }
   }
 
-  private _getCoordinatesFromEvent(event: MouseEvent): MapPointCoordinates {
-    const rect = (event.target as HTMLCanvasElement).getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
+  ngAfterViewInit(): void {
+    this._tokenDrawerService.init(this._canvas.nativeElement);
+    this._initMap();
+  }
 
-    return {x, y};
+  debug(): void {
+  //
+  }
+
+  private _initMap(): void {
+    this._userMovementTrackerService.init(this._canvas.nativeElement, this.map.metadata);
+    this._setMapListeners();
+  }
+
+  private _setMapListeners(): void {
+    this._resetSubscriptionsSteam$.next();
+
+    this._userMovementTrackerService.playerPositionStream$.pipe(
+      takeUntil(this._resetSubscriptionsSteam$)
+    ).subscribe({
+      next: (position) => {
+        this._tokenDrawerService.drawPin(position);
+      },
+    });
+
+    this._userMovementTrackerService.locationCollisionStream$.pipe(
+      takeUntil(this._resetSubscriptionsSteam$)
+    ).subscribe({
+      next: (mapLocation) => this.locationChanged.emit(mapLocation)
+    });
   }
 }

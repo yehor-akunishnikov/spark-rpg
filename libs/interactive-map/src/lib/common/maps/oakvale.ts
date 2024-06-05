@@ -1,6 +1,6 @@
-import { MAP_NAMES, MapUIData, SVG_MAP_DATA_ELEMENT_TYPES } from '@spark-rpg/shared-models';
+import { MAP_NAMES, MapSvgData, SVG_MAP_DATA_ELEMENT_TYPES } from '@spark-rpg/shared-models';
 
-const mapData: MapUIData = {
+const mapData: MapSvgData = {
   name: MAP_NAMES.OAKVALE,
   background: {
     type: SVG_MAP_DATA_ELEMENT_TYPES.RECT,

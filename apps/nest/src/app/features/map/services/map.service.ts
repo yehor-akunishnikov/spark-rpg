@@ -28,4 +28,8 @@ export class MapService {
 
     return map;
   }
+
+  public async delete(id: string): Promise<void> {
+    await this.mapRepository.delete({id});
+  }
 }

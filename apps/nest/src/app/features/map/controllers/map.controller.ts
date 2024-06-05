@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 
 import { MapMetadata } from '@spark-rpg/shared-models';
 
@@ -32,5 +32,10 @@ export class MapController {
     const map = await this.mapService.create(createMapRequestDto);
 
     return plainToInstance(MapResponseDto, map);
+  }
+
+  @Delete(':id')
+  public async delete(@Param('id') id: string): Promise<void> {
+    return this.mapService.delete(id);
   }
 }

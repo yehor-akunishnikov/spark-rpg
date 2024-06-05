@@ -6,25 +6,25 @@
     [attr.fill]="fill"
   >
     <rect
-      [attr.x]="map.uiData.background.rect.x"
-      [attr.y]="map.uiData.background.rect.y"
-      [attr.width]="map.uiData.background.rect.width"
-      [attr.height]="map.uiData.background.rect.height"
-      [attr.fill]="map.uiData.background.rect.fill"
+      [attr.x]="map.svgData.background.rect.x"
+      [attr.y]="map.svgData.background.rect.y"
+      [attr.width]="map.svgData.background.rect.width"
+      [attr.height]="map.svgData.background.rect.height"
+      [attr.fill]="map.svgData.background.rect.fill"
     />
 
     <path
       #road
-      [attr.d]="map.uiData.road.path.d"
-      [attr.stroke-width]="map.uiData.road.path.strokeWidth"
-      [attr.stroke]="map.uiData.road.path.stroke"
-      [attr.fill]="map.uiData.road.path.fill"
-      [attr.fill-rule]="map.uiData.road.path.fillRule"
-      [attr.clip-rule]="map.uiData.road.path.clipRule"
-      [attr.id]="map.uiData.road.path.id"
+      [attr.d]="map.svgData.road.path.d"
+      [attr.stroke-width]="map.svgData.road.path.strokeWidth"
+      [attr.stroke]="map.svgData.road.path.stroke"
+      [attr.fill]="map.svgData.road.path.fill"
+      [attr.fill-rule]="map.svgData.road.path.fillRule"
+      [attr.clip-rule]="map.svgData.road.path.clipRule"
+      [attr.id]="map.svgData.road.path.id"
     />
 
-    <ng-container *ngFor="let svgData of map.uiData.svgDataList">
+    <ng-container *ngFor="let svgData of map.svgData.svgDataList">
       <ng-container [ngSwitch]="svgData.type">
         <ng-container *ngSwitchCase="SVG_MAP_DATA_ELEMENT_TYPES.CIRCLE">
           <circle

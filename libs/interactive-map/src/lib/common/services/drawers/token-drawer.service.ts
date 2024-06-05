@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Map, MapPointCoordinates } from '@spark-rpg/shared-models';
+import { MapPointCoordinates } from '@spark-rpg/shared-models';
 
 import { InteractiveMapComponent } from '../../../interactive-map/interactive-map.component';
 
@@ -8,27 +8,18 @@ import { InteractiveMapComponent } from '../../../interactive-map/interactive-ma
   providedIn: InteractiveMapComponent
 })
 export class TokenDrawerService {
-  private _gameTerritory: (number | [number, number])[][];
   private _ctx: CanvasRenderingContext2D;
   private _canvasSize: number;
 
-  public setCanvasData(canvas: HTMLCanvasElement, map: Map): void {
+  public init(canvas: HTMLCanvasElement): void {
     this._ctx = canvas.getContext('2d');
     this._canvasSize = canvas.width;
-    this._gameTerritory = map.gameTerritory.map(row => {
-      return row.split(';').map(cell => {
-        const cellData = cell.split('.').map(cellDataItem => Number(cellDataItem));
-
-        return cellData.length === 1 ? cellData[0] : [cellData[0], cellData[1]];
-      });
-    });
   }
 
   drawPin({x, y}: MapPointCoordinates): void {
-    if (this.isPinCollidesWithBoundary({x, y})) {
-      this._ctx.clearRect(0, 0, this._canvasSize, this._canvasSize);
-      this._drawCircle(5, {x, y}, 'blue');
-    }
+    console.log(x, y);
+    this._ctx.clearRect(0, 0, this._canvasSize, this._canvasSize);
+    this._drawCircle(5, {x, y}, 'blue');
   }
 
   private _drawCircle(size: number, mapPointCoordinates: MapPointCoordinates, color: string): void {
@@ -42,15 +33,5 @@ export class TokenDrawerService {
     );
     this._ctx.fillStyle = color;
     this._ctx.fill();
-  }
-
-  isPinCollidesWithBoundary({x, y}: MapPointCoordinates): boolean {
-    return !!this._gameTerritory[y]?.some(boundary => {
-      if (Array.isArray(boundary)) {
-        return x >= boundary[0] && x <= boundary[1];
-      } else {
-        return x === boundary;
-      }
-    });
   }
 }

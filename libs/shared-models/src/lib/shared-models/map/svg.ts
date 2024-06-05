@@ -1,5 +1,10 @@
-export enum MAP_NAMES {
-  OAKVALE = 'Oakvale',
+import { MAP_NAMES } from './general';
+
+export interface MapSvgData {
+  name: MAP_NAMES;
+  svgDataList: SvgMapDataElement[];
+  background: SvgMapDataRect;
+  road: SvgMapDataPath;
 }
 
 export enum SVG_MAP_DATA_ELEMENT_TYPES {
@@ -43,33 +48,3 @@ export type SvgMapDataRect = {
 }
 
 export type SvgMapDataElement = SvgMapDataPath | SvgMapDataCircle | SvgMapDataRect;
-
-export interface MapMetadata {
-  id: string;
-  name: string;
-  gameTerritory: string[];
-}
-
-export interface MapUIData {
-  name: MAP_NAMES;
-  svgDataList: SvgMapDataElement[];
-  background: SvgMapDataRect;
-  road: SvgMapDataPath;
-}
-
-export interface Map {
-  id: string;
-  name: string;
-  gameTerritory: string[];
-  uiData: MapUIData;
-}
-
-export interface MapAreaCoordinates {
-  leftTopCorner: MapPointCoordinates,
-  rightBottomCorner: MapPointCoordinates,
-}
-
-export interface MapPointCoordinates {
-  x: number,
-  y: number
-}

@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { NgForOf, NgIf, NgSwitch, NgSwitchCase } from '@angular/common';
 
-import { Map, SVG_MAP_DATA_ELEMENT_TYPES } from '@spark-rpg/shared-models';
+import { SVG_MAP_DATA_ELEMENT_TYPES, UIMap } from '@spark-rpg/shared-models';
 
 @Component({
   selector: 'spark-ui-svg-drawer',
@@ -18,14 +18,14 @@ import { Map, SVG_MAP_DATA_ELEMENT_TYPES } from '@spark-rpg/shared-models';
 export class SvgDrawerComponent implements AfterViewInit {
   readonly SVG_MAP_DATA_ELEMENT_TYPES = SVG_MAP_DATA_ELEMENT_TYPES;
 
-  @Input() map: Map | null = null;
+  @Input() map: UIMap | null = null;
   @Input() size: number;
   @Input() fill: string;
   @Input() viewBox: string;
 
   @ViewChild('road') private readonly _road: ElementRef<SVGPathElement>;
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     console.log(this._road.nativeElement);
   }
 }

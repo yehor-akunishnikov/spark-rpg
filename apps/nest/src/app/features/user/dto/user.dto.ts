@@ -1,13 +1,13 @@
 import { Expose } from 'class-transformer';
 
-import { USER_ROLES } from '@spark-rpg/shared-models';
+import { USER_ROLES, UserMe, UserProfile } from '@spark-rpg/shared-models';
 
-export class UserProfileResponseDto {
+export class UserProfileResponseDto implements UserProfile {
   @Expose()
   username: string;
 }
 
-export class UserMeResponseDto {
+export class UserMeResponseDto implements UserMe {
   @Expose()
   username: string;
 
