@@ -11,7 +11,7 @@ import { UserMe, UserProfile } from '@spark-rpg/shared-models';
 export class UserRestService {
   private readonly _http: HttpClient = inject(HttpClient);
 
-  private readonly _apiSectionUrl = '/user';
+  private readonly _apiSectionUrl = 'user';
 
   async getAll(): Promise<UserProfile[]> {
     return lastValueFrom(this._http.get<UserProfile[]>(this._apiSectionUrl));

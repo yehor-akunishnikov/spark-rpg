@@ -17,7 +17,11 @@ export class LogoutPageComponent implements OnInit {
   private readonly _router = inject(Router);
 
   async ngOnInit(): Promise<void> {
-    await this._authRestService.logout();
+    try {
+      await this._authRestService.logout();
+    } catch (e) {
+      await this._router.navigate(['/', APP_ROUTES.AUTH, APP_ROUTES.LOGIN]);
+    }
 
     this._usersStore.reset();
 
