@@ -12,8 +12,7 @@ import { provideStore } from '@ngrx/store';
 import {
   API_BASE_URL_TOKEN,
   apiBaseUrlInterceptor,
-  authErrorInterceptor,
-  requestConfigInterceptor
+  authErrorInterceptor
 } from '@spark-rpg/http-config';
 
 import { environment } from '../environments/environment';
@@ -26,7 +25,6 @@ export const appConfig: ApplicationConfig = {
       withFetch(),
       withInterceptors([
         apiBaseUrlInterceptor,
-        requestConfigInterceptor,
         authErrorInterceptor
       ])
     ),
