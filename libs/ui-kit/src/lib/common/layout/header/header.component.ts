@@ -1,5 +1,5 @@
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 export interface HeaderNavLink {
@@ -11,7 +11,8 @@ export interface HeaderNavLink {
   selector: 'spark-ui-header',
   standalone: true,
   imports: [CommonModule, RouterLinkActive, RouterLink],
-  templateUrl: './header.component.html'
+  templateUrl: './header.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent {
   @Input() links: HeaderNavLink[] = [];

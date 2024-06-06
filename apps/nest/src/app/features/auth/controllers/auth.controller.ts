@@ -8,6 +8,7 @@ import { UserService } from '../../user/services/user.service';
 import { TokenWrapper, User } from '@spark-rpg/shared-models';
 import { LocalAuthGuard } from '../guards/local-auth.guard';
 import { AuthService } from '../services/auth.service';
+import { JwtAuthGuard } from '../guards/jwt-auth.guard';
 
 @Controller('auth')
 export class AuthController {

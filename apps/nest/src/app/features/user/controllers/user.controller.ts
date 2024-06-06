@@ -27,6 +27,7 @@ export class UserController {
   ) {
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get()
   public async getAll(@Query('username') username?: string): Promise<UserProfile[]> {
     const users = await this.userService.findAll(username);
@@ -34,6 +35,7 @@ export class UserController {
     return plainToInstance(UserProfileResponseDto, users);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get('me')
   @UseGuards(JwtAuthGuard)
   public async getUserMe(@Req() request: Request<{user: User}>): Promise<UserMe> {
@@ -43,6 +45,7 @@ export class UserController {
     return plainToInstance(UserMeResponseDto, user);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get(':username')
   public async getOne(@Param('username') username: string): Promise<UserProfile> {
     const user = await this.userService.findOne(username);
@@ -50,6 +53,7 @@ export class UserController {
     return plainToInstance(UserProfileResponseDto, user);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Delete(':id')
   @HttpCode(HttpStatus.OK)
   public async delete(@Param('id') id: string): Promise<void> {

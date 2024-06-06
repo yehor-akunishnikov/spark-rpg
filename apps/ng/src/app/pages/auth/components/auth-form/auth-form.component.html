@@ -5,6 +5,7 @@
         {{formTitle}}
       </h1>
     </spark-ui-card-header>
+
     <spark-ui-card-body>
       <div class="mb-6">
         <spark-ui-input-group
@@ -20,10 +21,12 @@
           [errorsConfig]="passwordErrorsConfig"
           formControlName="password"
           label="Password"
+          type="password"
           size="sm"
         />
       </div>
     </spark-ui-card-body>
+
     <spark-ui-card-footer>
       <div class="mb-1">
         <button type="submit" sparkUiBtn withMode="full">

@@ -3,8 +3,7 @@ import { RouterLink } from '@angular/router';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 
 import { CardBodyComponent, CardComponent, CardFooterComponent, CardHeaderComponent, BtnDirective } from '@spark-rpg/ui-kit';
-
-import { APP_ROUTES } from '../../../../app.routes';
+import { APP_ROUTES } from '@spark-rpg/shared-models';
 
 @Component({
   selector: 'app-character-card',

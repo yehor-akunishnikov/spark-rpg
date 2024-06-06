@@ -1,18 +1,16 @@
 import { Route } from '@angular/router';
 
-export enum APP_ROUTES {
-  HOME = 'home',
-  CHARACTERS = 'characters',
-  AUTH = 'auth',
-  LOGIN = 'login',
-  REGISTER = 'register',
-  LOGOUT = 'logout'
-}
+import { APP_ROUTES } from '@spark-rpg/shared-models';
+
+import { authenticationGuard } from './common/guards/authentication.guard';
 
 export const appRoutes: Route[] = [
   {
     path: '',
     loadComponent: () => import('./layouts/default-layout/default-layout.component').then(m => m.DefaultLayoutComponent),
+    canActivateChild: [
+      authenticationGuard
+    ],
     children: [
       {
         path: '',

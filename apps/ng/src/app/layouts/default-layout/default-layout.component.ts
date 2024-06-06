@@ -2,8 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 import { FooterComponent, HeaderComponent, MainComponent } from '@spark-rpg/ui-kit';
-
-import { APP_ROUTES } from '../../app.routes';
+import { APP_ROUTES } from '@spark-rpg/shared-models';
 
 @Component({
   selector: 'app-default-layout',

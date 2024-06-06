@@ -1,9 +1,8 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AuthRestService } from '@spark-rpg/dl-packages';
-
-import { APP_ROUTES } from '../../../app.routes';
+import { AuthRestService, UsersStore } from '@spark-rpg/dl-packages';
+import { APP_ROUTES } from '@spark-rpg/shared-models';
 
 @Component({
   selector: 'app-logout',
@@ -13,16 +12,19 @@ import { APP_ROUTES } from '../../../app.routes';
   styleUrl: './logout-page.component.scss'
 })
 export class LogoutPageComponent implements OnInit {
+  private readonly _usersStore = inject(UsersStore);
   private readonly _authRestService: AuthRestService = inject(AuthRestService);
   private readonly _router = inject(Router);
 
-  ngOnInit(): void {
-    this._authRestService.logout().subscribe({
-      next: () => {
-        setTimeout(() => {
-          this._router.navigateByUrl(`/${APP_ROUTES.AUTH}/${APP_ROUTES.LOGIN}`);
-        }, 3000);
-      }
+  async ngOnInit(): Promise<void> {
+    await this._authRestService.logout();
+
+    this._usersStore.reset();
+
+    await new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(this._router.navigate(['/', APP_ROUTES.AUTH, APP_ROUTES.LOGIN]));
+      }, 2000);
     });
   }
 }

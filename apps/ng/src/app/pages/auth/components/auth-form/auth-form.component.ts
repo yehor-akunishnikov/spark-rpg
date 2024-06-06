@@ -3,7 +3,7 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NgIf, NgSwitch, NgSwitchCase } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 
-import { LoginPayload, RegisterPayload } from '@spark-rpg/shared-models';
+import { APP_ROUTES, LoginPayload, RegisterPayload } from '@spark-rpg/shared-models';
 import { AuthRestService } from '@spark-rpg/dl-packages';
 import {
   BtnDirective,
@@ -16,7 +16,6 @@ import {
 } from '@spark-rpg/ui-kit';
 
 import { AUTH_ACTIONS, AuthFormBuilderService } from './services/auth-form-builder.service';
-import { APP_ROUTES } from '../../../../app.routes';
 
 @Component({
   selector: 'app-auth-form',
@@ -65,7 +64,7 @@ export class AuthFormComponent implements OnInit {
     this.authForm = this._authFormBuilderService.init(this.authAction);
   }
 
-  onSubmit(form: FormGroup) {
+  async onSubmit(form: FormGroup) {
     if (form.invalid || form.pristine) {
       return;
     }
@@ -74,29 +73,25 @@ export class AuthFormComponent implements OnInit {
 
     switch (this.authAction) {
       case AUTH_ACTIONS.REGISTER: {
-        this._register(payload);
+        await this._register(payload);
         break;
       }
       case AUTH_ACTIONS.LOGIN: {
-        this._login(payload);
+        await this._login(payload);
         break;
       }
     }
   }
 
-  private _register(registerPayload: RegisterPayload): void {
-    this._authRestService.register(registerPayload).subscribe({
-      next: () => {
-        this._router.navigate(['/', APP_ROUTES.AUTH, APP_ROUTES.LOGIN]);
-      },
-    });
+  private async _register(registerPayload: RegisterPayload): Promise<void> {
+    await this._authRestService.register(registerPayload);
+
+    await this._router.navigate(['/', APP_ROUTES.AUTH, APP_ROUTES.LOGIN]);
   }
 
-  private _login(loginPayload: LoginPayload): void {
-    this._authRestService.login(loginPayload).subscribe({
-      next: () => {
-        this._router.navigate(['/', APP_ROUTES.HOME]);
-      },
-    });
+  private async _login(loginPayload: LoginPayload): Promise<void> {
+    await this._authRestService.login(loginPayload);
+
+    await this._router.navigate(['/', APP_ROUTES.HOME]);
   }
 }

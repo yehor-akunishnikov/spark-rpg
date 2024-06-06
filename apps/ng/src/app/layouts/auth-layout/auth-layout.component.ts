@@ -6,8 +6,7 @@ import { map, Observable } from 'rxjs';
 
 import { FooterComponent, HeaderComponent, HeaderNavLink, LAYOUT_TYPES, MainComponent } from '@spark-rpg/ui-kit';
 import { RouterDataService } from '@spark-rpg/dl-packages';
-
-import { APP_ROUTES } from '../../app.routes';
+import { APP_ROUTES } from '@spark-rpg/shared-models';
 
 @Component({
   selector: 'app-auth-layout',
@@ -26,18 +25,12 @@ export class AuthLayoutComponent {
   private readonly _routerDataService: RouterDataService = inject(RouterDataService);
 
   readonly LAYOUT_TYPES = LAYOUT_TYPES;
-  headerLinks$: Observable<HeaderNavLink[]> = this._getHeaderLinks();
+  readonly headerLinks$: Observable<HeaderNavLink[]> = this._getHeaderLinks();
 
   private _getHeaderLinks(): Observable<HeaderNavLink[]> {
     return this._routerDataService.currentUrl$.pipe(
       map(currentUrl => {
-        let links: HeaderNavLink[] = [
-          { url: `/${APP_ROUTES.HOME}`, text: 'Home'}
-        ];
-
-        if (currentUrl.includes(APP_ROUTES.LOGOUT)) {
-          links = [];
-        }
+        const links: HeaderNavLink[] = [];
 
         if (currentUrl.includes(APP_ROUTES.LOGIN)) {
           links.push({ url: `/${APP_ROUTES.AUTH}/${APP_ROUTES.REGISTER}`, text: 'Register' });

@@ -58,7 +58,7 @@ export class InputGroupComponent {
   @Input() size: InputGroupSize = 'md';
   @Input() errorsConfig: Record<string, string> = errorsMap;
   @Input() label = 'Default label';
-  @Input() type: 'text' | 'number' = 'text';
+  @Input() type: 'text' | 'number' | 'password' = 'text';
 
   ngControl = injectNgControl();
 }

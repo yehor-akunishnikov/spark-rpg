@@ -1,8 +1,9 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, UseGuards } from '@nestjs/common';
 
 import { MapMetadata } from '@spark-rpg/shared-models';
 
 import { CreateMapRequestDto, MapResponseDto } from '../dto/map.dto';
+import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
 import { MapService } from '../services/map.service';
 import { plainToInstance } from 'class-transformer';
 
@@ -13,6 +14,7 @@ export class MapController {
   ) {
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get()
   public async getAll(): Promise<MapMetadata[]> {
     const maps = await this.mapService.findAll();
@@ -20,6 +22,7 @@ export class MapController {
     return plainToInstance(MapResponseDto, maps);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get(':id')
   public async getOne(@Param('id') id: string): Promise<MapMetadata> {
     const map = await this.mapService.findOne(id);
@@ -27,6 +30,7 @@ export class MapController {
     return plainToInstance(MapResponseDto, map);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Post()
   public async create(@Body() createMapRequestDto: CreateMapRequestDto): Promise<MapMetadata> {
     const map = await this.mapService.create(createMapRequestDto);
@@ -34,6 +38,7 @@ export class MapController {
     return plainToInstance(MapResponseDto, map);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Delete(':id')
   public async delete(@Param('id') id: string): Promise<void> {
     return this.mapService.delete(id);
