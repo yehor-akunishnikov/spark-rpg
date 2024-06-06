@@ -12,20 +12,16 @@ export class UserRestService {
   private readonly _http: HttpClient = inject(HttpClient);
 
   private readonly _apiSectionUrl = 'user';
-  private readonly _httpSettings = {
-    withCredentials: true,
-    credentials: 'include'
-  };
 
   async getAll(): Promise<UserProfile[]> {
-    return lastValueFrom(this._http.get<UserProfile[]>(this._apiSectionUrl, this._httpSettings));
+    return lastValueFrom(this._http.get<UserProfile[]>(this._apiSectionUrl));
   }
 
   async getOne(username: string): Promise<UserProfile> {
-    return lastValueFrom(this._http.get<UserProfile>(`${this._apiSectionUrl}/${username}`, this._httpSettings));
+    return lastValueFrom(this._http.get<UserProfile>(`${this._apiSectionUrl}/${username}`));
   }
 
   async getCurrentUser(): Promise<UserMe> {
-    return lastValueFrom(this._http.get<UserMe>(`${this._apiSectionUrl}/me`, this._httpSettings));
+    return lastValueFrom(this._http.get<UserMe>(`${this._apiSectionUrl}/me`));
   }
 }
