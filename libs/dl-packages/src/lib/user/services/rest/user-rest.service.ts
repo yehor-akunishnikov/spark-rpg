@@ -13,7 +13,8 @@ export class UserRestService {
 
   private readonly _apiSectionUrl = 'user';
   private readonly _httpSettings = {
-    withCredentials: true
+    withCredentials: true,
+    credentials: 'include'
   };
 
   async getAll(): Promise<UserProfile[]> {

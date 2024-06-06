@@ -13,7 +13,8 @@ export class AuthRestService {
 
   private readonly _apiSectionUrl = 'auth';
   private readonly _httpSettings = {
-    withCredentials: true
+    withCredentials: true,
+    credentials: 'include'
   };
 
   async register(registerPayload: RegisterPayload): Promise<void> {
