@@ -63,14 +63,14 @@
           "buildTarget": "ng:build:production"
         },
         "development": {
-          "buildTarget": "ng:build:development"
+          "buildTarget": "ng:build:development",
+          "options": {
+            "proxyConfig": "apps/ng/proxy.conf.json",
+            "host": "0.0.0.0"
+          }
         }
       },
-      "defaultConfiguration": "development",
-      "options": {
-        "proxyConfig": "apps/ng/proxy.conf.json",
-        "host": "0.0.0.0"
-      }
+      "defaultConfiguration": "development"
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
