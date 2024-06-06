@@ -2,10 +2,10 @@ import { ClassSerializerInterceptor, Logger, ValidationPipe } from '@nestjs/comm
 import { NestFactory, Reflector } from '@nestjs/core';
 
 import cookieParser from 'cookie-parser';
+import * as process from 'node:process';
 
 import { TypeOrmFilter } from './app/common/exception-filters/type-orm.filter';
 import { AppModule } from './app/app.module';
-import * as process from 'node:process';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -26,11 +26,20 @@ async function bootstrap() {
   );
   app.use(cookieParser());
 
-  if (process.env.ENV !== 'dev') {
-    app.enableCors({
-      origin: process.env.UI_URL
-    });
-  }
+  app.enableCors({
+    origin: [
+      process.env.UI_URL
+    ],
+    allowedHeaders: [
+      'X-Requested-With',
+      'X-HTTP-Method-Override',
+      'Content-Type',
+      'Accept',
+      'Observe',
+      'Cookie'
+    ],
+    credentials: true
+  });
 
   await app.listen(port);
 

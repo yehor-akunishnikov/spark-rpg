@@ -24,7 +24,9 @@ export class HomePageComponent {
   private _http: HttpClient = inject(HttpClient);
   illustration: string | null = null;
 
-  map$: Observable<UIMap> = this._http.get<MapMetadata[]>('map').pipe(
+  map$: Observable<UIMap> = this._http.get<MapMetadata[]>('map', {
+    withCredentials: true
+  }).pipe(
     map(mapMetadataList => this._createMapFromMetadata(mapMetadataList[0]))
   );
 

@@ -8,7 +8,6 @@ import { UserService } from '../../user/services/user.service';
 import { TokenWrapper, User } from '@spark-rpg/shared-models';
 import { LocalAuthGuard } from '../guards/local-auth.guard';
 import { AuthService } from '../services/auth.service';
-import { JwtAuthGuard } from '../guards/jwt-auth.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -42,6 +41,7 @@ export class AuthController {
     response.cookie('user_token', token, {
       httpOnly: true,
       expires: new Date(Date.now() + 3600000),
+      sameSite: false
     });
 
     return;

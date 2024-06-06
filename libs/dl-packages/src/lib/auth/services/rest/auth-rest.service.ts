@@ -12,16 +12,25 @@ export class AuthRestService {
   private readonly _http: HttpClient = inject(HttpClient);
 
   private readonly _apiSectionUrl = 'auth';
+  private readonly _httpSettings = {
+    withCredentials: true
+  };
 
   async register(registerPayload: RegisterPayload): Promise<void> {
-    return lastValueFrom(this._http.post<void>(`${this._apiSectionUrl}/register`, registerPayload));
+    return lastValueFrom(
+      this._http.post<void>(`${this._apiSectionUrl}/register`, registerPayload, this._httpSettings)
+    );
   }
 
   async login(loginPayload: LoginPayload): Promise<void> {
-    return lastValueFrom(this._http.post<void>(`${this._apiSectionUrl}/login`, loginPayload));
+    return lastValueFrom(
+      this._http.post<void>(`${this._apiSectionUrl}/login`, loginPayload, this._httpSettings)
+    );
   }
 
   async logout(): Promise<void> {
-    return lastValueFrom(this._http.get<void>(`${this._apiSectionUrl}/logout`));
+    return lastValueFrom(
+      this._http.get<void>(`${this._apiSectionUrl}/logout`, this._httpSettings)
+    );
   }
 }
