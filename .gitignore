@@ -40,3 +40,6 @@ Thumbs.db
 
 .nx/cache
 .angular
+
+etc/secrets/environment.dev.ts
+etc/secrets/environment.prod.ts
