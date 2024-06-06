@@ -25,7 +25,7 @@
           "fileReplacements": [
             {
               "replace": "apps/ng/src/environments/environment.ts",
-              "with": "/etc/secrets/environment.prod.ts"
+              "with": "apps/ng/src/environments/environment.prod.ts"
             }
           ],
           "budgets": [
@@ -46,7 +46,7 @@
           "fileReplacements": [
             {
               "replace": "apps/ng/src/environments/environment.ts",
-              "with": "/etc/secrets/environment.dev.ts"
+              "with": "apps/ng/src/environments/environment.dev.ts"
             }
           ],
           "optimization": false,
