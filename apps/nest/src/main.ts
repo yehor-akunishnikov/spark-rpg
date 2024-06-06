@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser';
 
 import { TypeOrmFilter } from './app/common/exception-filters/type-orm.filter';
 import { AppModule } from './app/app.module';
+import * as process from 'node:process';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -24,6 +25,12 @@ async function bootstrap() {
     }),
   );
   app.use(cookieParser());
+
+  if (process.env.ENV !== 'dev') {
+    app.enableCors({
+      origin: process.env.UI_URL
+    });
+  }
 
   await app.listen(port);
 
