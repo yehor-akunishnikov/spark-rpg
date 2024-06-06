@@ -7,8 +7,8 @@
     "start:server": "nx run nest:serve:production",
     "start:client": "nx run ng:serve:production",
     "build": "nx build ng && nx build nest",
-    "build:server": "nx build nest",
-    "build:client": "nx build ng",
+    "build:server": "nx build nest --skip-nx-cache",
+    "build:client": "nx build ng --skip-nx-cache",
     "dev:server": "nx run nest:serve",
     "dev:client": "nx run ng:serve",
     "dev:ui-playground": "nx run ui-playground:serve"
