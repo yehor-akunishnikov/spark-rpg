@@ -13,6 +13,8 @@ export interface MapMetadata {
   locations: MapMetadataLocation[];
 }
 
+export type MapMetadataUpdatePayload = Pick<MapMetadata, 'gameTerritory' | 'locations'>;
+
 export interface MapMetadataLocation {
   name: LOCATION_NAMES,
   position: string;

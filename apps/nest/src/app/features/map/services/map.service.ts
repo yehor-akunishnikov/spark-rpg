@@ -3,7 +3,7 @@ import { Injectable } from '@nestjs/common';
 
 import { Repository } from 'typeorm';
 
-import { CreateMapRequestDto } from '../dto/map.dto';
+import { CreateMapRequestDto, UpdateMapRequestDto } from '../dto/map.dto';
 import { MapEntity } from '../models/map.entity';
 
 @Injectable()
@@ -27,6 +27,10 @@ export class MapService {
     await this.mapRepository.insert(map);
 
     return map;
+  }
+
+  public async update(id: string, updateMapRequestDto: UpdateMapRequestDto): Promise<MapEntity> {
+    return (await this.mapRepository.update({id}, updateMapRequestDto)).raw[0];
   }
 
   public async delete(id: string): Promise<void> {

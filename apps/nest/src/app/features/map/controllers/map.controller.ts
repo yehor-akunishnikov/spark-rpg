@@ -1,8 +1,8 @@
-import { Body, Controller, Delete, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
 
 import { MapMetadata } from '@spark-rpg/shared-models';
 
-import { CreateMapRequestDto, MapResponseDto } from '../dto/map.dto';
+import { CreateMapRequestDto, MapResponseDto, UpdateMapRequestDto } from '../dto/map.dto';
 import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
 import { MapService } from '../services/map.service';
 import { plainToInstance } from 'class-transformer';
@@ -34,6 +34,17 @@ export class MapController {
   @Post()
   public async create(@Body() createMapRequestDto: CreateMapRequestDto): Promise<MapMetadata> {
     const map = await this.mapService.create(createMapRequestDto);
+
+    return plainToInstance(MapResponseDto, map);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Put(':id')
+  public async update(
+    @Param('id') id: string,
+    @Body() updateMapRequestDto: UpdateMapRequestDto
+  ): Promise<MapMetadata> {
+    const map = await this.mapService.update(id, updateMapRequestDto);
 
     return plainToInstance(MapResponseDto, map);
   }

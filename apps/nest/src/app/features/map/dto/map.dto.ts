@@ -1,7 +1,7 @@
 import { ArrayNotEmpty, IsArray, IsEnum, IsNotEmpty, IsString, ValidateNested } from 'class-validator';
 import { Expose, Type } from 'class-transformer';
 
-import { LOCATION_NAMES, MAP_NAMES, MapMetadata, MapMetadataLocation } from '@spark-rpg/shared-models';
+import { LOCATION_NAMES, MAP_NAMES, MapMetadata, MapMetadataLocation, MapMetadataUpdatePayload } from '@spark-rpg/shared-models';
 
 class MapMetadataLocationRequestDto implements MapMetadataLocation {
   @IsString()
@@ -24,6 +24,19 @@ export class CreateMapRequestDto implements MapMetadata {
   @IsEnum(MAP_NAMES)
   name: MAP_NAMES;
 
+  @IsArray()
+  @ArrayNotEmpty()
+  @IsString({each: true})
+  gameTerritory: string[];
+
+  @IsArray()
+  @ArrayNotEmpty()
+  @ValidateNested({each: true})
+  @Type(() => MapMetadataLocationRequestDto)
+  locations: MapMetadataLocation[];
+}
+
+export class UpdateMapRequestDto implements MapMetadataUpdatePayload {
   @IsArray()
   @ArrayNotEmpty()
   @IsString({each: true})
