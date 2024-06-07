@@ -34,23 +34,22 @@
         </button>
       </div>
 
-      <ng-container [ngSwitch]="authAction">
-        <ng-container *ngSwitchCase="AUTH_ACTIONS.REGISTER">
+      @switch (authAction) {
+        @case (AUTH_ACTIONS.REGISTER) {
           <a class="text-orange-400 underline text-center w-full block text-sm"
              [routerLink]="['/', APP_ROUTES.AUTH , APP_ROUTES.LOGIN]"
           >
             Already have an account?
           </a>
-        </ng-container>
-
-        <ng-container *ngSwitchCase="AUTH_ACTIONS.LOGIN">
+        }
+        @case (AUTH_ACTIONS.LOGIN) {
           <a class="text-orange-400 underline text-center w-full block text-sm"
              [routerLink]="['/', APP_ROUTES.AUTH , APP_ROUTES.REGISTER]"
           >
             Don't have an account yet?
           </a>
-        </ng-container>
-      </ng-container>
+        }
+      }
     </spark-ui-card-footer>
   </spark-ui-card>
 </form>

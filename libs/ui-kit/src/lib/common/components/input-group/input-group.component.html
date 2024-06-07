@@ -19,7 +19,7 @@
     [hasError]="ngControl.invalid && ngControl.touched"
   />
 
-  <ng-container *ngIf="ngControl.invalid && ngControl.touched">
+  @if (ngControl.invalid && ngControl.touched) {
     <div
       class="absolute left-0"
       [ngClass]="spacingClassesMap[size].error"
@@ -27,11 +27,11 @@
       color="error"
       [size]="size"
     >
-      <ng-container *ngFor="let errorsConfigItem of errorsConfig | keyvalue">
-        <ng-container *ngIf="ngControl.hasError(errorsConfigItem.key)">
+      @for (errorsConfigItem of errorsConfig | keyvalue; track errorsConfigItem.key) {
+        @if (ngControl.hasError(errorsConfigItem.key)) {
           {{errorsConfigItem.value}}
-        </ng-container>
-      </ng-container>
+        }
+      }
     </div>
-  </ng-container>
+  }
 </div>

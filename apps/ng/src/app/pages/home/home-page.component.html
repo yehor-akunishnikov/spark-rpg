@@ -1,11 +1,11 @@
-<ng-container *ngIf="map$ | async as map">
+@if (map$ | async; as map) {
   <spark-ui-interactive-map
     [map]="map"
     [canvasSize]="500"
     (locationChanged)="onLocationChange($event)"
   />
-</ng-container>
+}
 
-<ng-container *ngIf="illustration">
+@if (illustration) {
   <img [ngSrc]="illustration" alt="" width="500" height="273" priority="">
-</ng-container>
+}

@@ -1,5 +1,5 @@
 <ul>
-  <li *ngFor="let map of mapsStore.mapsEntities()">
-    {{map.name}}
-  </li>
+  @for (map of mapsStore.mapsEntities(); track map.id) {
+    <li>{{map.name}}</li>
+  }
 </ul>

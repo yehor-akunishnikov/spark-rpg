@@ -1,9 +1,9 @@
-<ng-container *ngIf="map">
+@if (map) {
   <svg xmlns="http://www.w3.org/2000/svg"
-    [attr.width]="size"
-    [attr.height]="size"
-    [attr.viewBox]="viewBox"
-    [attr.fill]="fill"
+       [attr.width]="size"
+       [attr.height]="size"
+       [attr.viewBox]="viewBox"
+       [attr.fill]="fill"
   >
     <rect
       [attr.x]="map.svgData.background.rect.x"
@@ -24,17 +24,17 @@
       [attr.id]="map.svgData.road.path.id"
     />
 
-    <ng-container *ngFor="let svgData of map.svgData.svgDataList">
-      <ng-container [ngSwitch]="svgData.type">
-        <ng-container *ngSwitchCase="SVG_MAP_DATA_ELEMENT_TYPES.CIRCLE">
+    @for (svgData of map.svgData.svgDataList; track $index) {
+      @switch (svgData.type) {
+        @case (SVG_MAP_DATA_ELEMENT_TYPES.CIRCLE) {
           <circle
             [attr.cx]="svgData['circle'].cx"
             [attr.cy]="svgData['circle'].cy"
             [attr.r]="svgData['circle'].r"
             [attr.fill]="svgData['circle'].fill"
           />
-        </ng-container>
-        <ng-container *ngSwitchCase="SVG_MAP_DATA_ELEMENT_TYPES.PATH">
+        }
+        @case (SVG_MAP_DATA_ELEMENT_TYPES.PATH) {
           <path
             [attr.d]="svgData['path'].d"
             [attr.stroke-width]="svgData['path'].strokeWidth"
@@ -44,8 +44,8 @@
             [attr.clip-rule]="svgData['path'].clipRule"
             [attr.id]="svgData['path'].id"
           />
-        </ng-container>
-        <ng-container *ngSwitchCase="SVG_MAP_DATA_ELEMENT_TYPES.RECT">
+        }
+        @case (SVG_MAP_DATA_ELEMENT_TYPES.RECT) {
           <rect
             [attr.x]="svgData['rect'].x"
             [attr.y]="svgData['rect'].y"
@@ -53,8 +53,8 @@
             [attr.height]="svgData['rect'].height"
             [attr.fill]="svgData['rect'].fill"
           />
-        </ng-container>
-      </ng-container>
-    </ng-container>
+        }
+      }
+    }
   </svg>
-</ng-container>
+}
