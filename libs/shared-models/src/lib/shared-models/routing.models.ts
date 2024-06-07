@@ -4,5 +4,7 @@ export enum APP_ROUTES {
   AUTH = 'auth',
   LOGIN = 'login',
   REGISTER = 'register',
-  LOGOUT = 'logout'
+  LOGOUT = 'logout',
+  ADMIN = 'admin',
+  MAP_CONFIG = 'map-configuration'
 }

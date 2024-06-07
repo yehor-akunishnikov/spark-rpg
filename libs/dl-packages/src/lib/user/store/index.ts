@@ -65,3 +65,5 @@ export const UsersStore = signalStore(
     }
   }),
 );
+
+export type UsersStoreInstance = InstanceType<typeof UsersStore>;

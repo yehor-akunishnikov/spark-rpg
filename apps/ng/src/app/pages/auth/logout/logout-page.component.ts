@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AuthRestService, UsersStore } from '@spark-rpg/dl-packages';
+import { AuthRestService, UsersStore, UsersStoreInstance } from '@spark-rpg/dl-packages';
 import { APP_ROUTES } from '@spark-rpg/shared-models';
 
 @Component({
@@ -12,7 +12,7 @@ import { APP_ROUTES } from '@spark-rpg/shared-models';
   styleUrl: './logout-page.component.scss'
 })
 export class LogoutPageComponent implements OnInit {
-  private readonly _usersStore = inject(UsersStore);
+  private readonly _usersStore: UsersStoreInstance = inject(UsersStore);
   private readonly _authRestService: AuthRestService = inject(AuthRestService);
   private readonly _router = inject(Router);
 

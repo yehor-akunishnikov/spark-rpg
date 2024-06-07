@@ -53,3 +53,5 @@ export const MapsStore = signalStore(
     }
   }),
 );
+
+export type MapsStoreInstance = InstanceType<typeof MapsStore>;

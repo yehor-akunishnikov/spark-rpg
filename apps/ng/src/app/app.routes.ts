@@ -2,6 +2,8 @@ import { Route } from '@angular/router';
 
 import { APP_ROUTES } from '@spark-rpg/shared-models';
 
+import { mapsLazyLoadResolver } from '@spark-rpg/dl-packages';
+
 import { authenticationGuard } from './common/guards/authentication.guard';
 
 export const appRoutes: Route[] = [
@@ -51,6 +53,24 @@ export const appRoutes: Route[] = [
       {
         path: APP_ROUTES.LOGOUT,
         loadComponent: () => import('./pages/auth/logout/logout-page.component').then(m => m.LogoutPageComponent),
+      }
+    ]
+  },
+  {
+    path: APP_ROUTES.ADMIN,
+    canActivateChild: [
+      authenticationGuard
+    ],
+    children: [
+      {
+        path: '',
+        redirectTo: APP_ROUTES.MAP_CONFIG,
+        pathMatch: 'full'
+      },
+      {
+        path: APP_ROUTES.MAP_CONFIG,
+        resolve: [mapsLazyLoadResolver],
+        loadComponent: () => import('./pages/admin/maps-configuration/maps-configuration-page.component').then(m => m.MapsConfigurationPageComponent)
       }
     ]
   },
