@@ -27,7 +27,6 @@ export class UserController {
   ) {
   }
 
-  @UseGuards(JwtAuthGuard)
   @Get()
   public async getAll(@Query('username') username?: string): Promise<UserProfile[]> {
     const users = await this.userService.findAll(username);
